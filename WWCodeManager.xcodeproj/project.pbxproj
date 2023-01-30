@@ -150,7 +150,7 @@
 		017F71FE29876E4300264825 /* SJVideoPlayerClipsParameters.m in Sources */ = {isa = PBXBuildFile; fileRef = 017F71CD29876E4100264825 /* SJVideoPlayerClipsParameters.m */; };
 		017F71FF29876E4300264825 /* SJFullscreenModeStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 017F71CE29876E4200264825 /* SJFullscreenModeStatusBar.m */; };
 		017F720029876E4300264825 /* SJVideoPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 017F71D129876E4300264825 /* SJVideoPlayer.bundle */; };
-		2546D0FD75357EEDE4AFD1AA /* Pods_WWCodeManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AFAD82F4FB429160F420FBE /* Pods_WWCodeManager.framework */; };
+		9083598A6ABA8B322A3B6056 /* libPods-WWCodeManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21DAC061AC302B90993B81BE /* libPods-WWCodeManager.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -473,7 +473,7 @@
 		017F71CF29876E4200264825 /* SJControlLayerDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJControlLayerDefines.h; sourceTree = "<group>"; };
 		017F71D029876E4200264825 /* SJVideoPlayerLocalizedStringKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJVideoPlayerLocalizedStringKeys.h; sourceTree = "<group>"; };
 		017F71D129876E4300264825 /* SJVideoPlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SJVideoPlayer.bundle; sourceTree = "<group>"; };
-		3AFAD82F4FB429160F420FBE /* Pods_WWCodeManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WWCodeManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		21DAC061AC302B90993B81BE /* libPods-WWCodeManager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WWCodeManager.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F5867A4EB602B0C138516BE /* Pods-WWCodeManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WWCodeManager.debug.xcconfig"; path = "Target Support Files/Pods-WWCodeManager/Pods-WWCodeManager.debug.xcconfig"; sourceTree = "<group>"; };
 		8E34747C6CB3FEB27F76A2BD /* Pods-WWCodeManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WWCodeManager.release.xcconfig"; path = "Target Support Files/Pods-WWCodeManager/Pods-WWCodeManager.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -483,7 +483,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2546D0FD75357EEDE4AFD1AA /* Pods_WWCodeManager.framework in Frameworks */,
+				9083598A6ABA8B322A3B6056 /* libPods-WWCodeManager.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -861,7 +861,7 @@
 		88AE2086BD77EFD116C5BBFB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3AFAD82F4FB429160F420FBE /* Pods_WWCodeManager.framework */,
+				21DAC061AC302B90993B81BE /* libPods-WWCodeManager.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -877,7 +877,6 @@
 				017F6D6629876AFF00264825 /* Sources */,
 				017F6D6729876AFF00264825 /* Frameworks */,
 				017F6D6829876AFF00264825 /* Resources */,
-				6E76BB6E8BAD81CBAD4C7BEF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -936,23 +935,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6E76BB6E8BAD81CBAD4C7BEF /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WWCodeManager/Pods-WWCodeManager-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WWCodeManager/Pods-WWCodeManager-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WWCodeManager/Pods-WWCodeManager-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		C39482CC26E1AC1479574B41 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1269,8 +1251,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1298,8 +1280,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

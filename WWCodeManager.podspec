@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "WWCodeManager"
-  spec.version      = "0.0.3"
+  spec.version      = "1.0.0"
   spec.summary      = "A short description of WWCodeManager."
 
   # This description is used to generate tags and improve search results.
@@ -106,7 +106,7 @@ Pod::Spec.new do |spec|
   #
 
   # spec.resource  = "icon.png"
-  spec.resources = ['WWCodeManager/Resource/SJVideoPlayer.bundle', 'WWCodeManager/Resource/SJBaseVideoPlayerResources.bundle']
+  spec.resources = ['WWCodeManager/Bundle/SJVideoPlayer.bundle', 'WWCodeManager/Bundle/SJBaseVideoPlayerResources.bundle']
 
   # spec.preserve_paths = "FilesToSave", "MoreFilesToSave"
 
@@ -133,6 +133,7 @@ Pod::Spec.new do |spec|
   # spec.requires_arc = true
 
   # spec.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-  spec.dependency "Masonry", "YYKit"
+  spec.dependency "Masonry"
+  spec.dependency "YYModel"
 
 end
