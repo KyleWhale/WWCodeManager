@@ -1,17 +1,17 @@
 //
 //  SJClipsSaveResultToAlbumHandler.m
-//  SJVideoPlayer
+//  SJCommonCode
 //
-//  Created by 畅三江 on 2019/1/20.
-//  Copyright © 2019 畅三江. All rights reserved.
+//  Created by admin on 2019/1/20.
+//  Copyright © 2019 admin. All rights reserved.
 //
 
 #import "SJClipsSaveResultToAlbumHandler.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <Photos/Photos.h>
 #import <MobileCoreServices/UTCoreTypes.h>
-#import "SJVideoPlayerConfigurations.h"
-#import "SJVideoPlayerClipsDefines.h"
+#import "SJCommonCodeConfigurations.h"
+#import "SJCommonCodeClipsDefines.h"
 
 NS_ASSUME_NONNULL_BEGIN
 @interface SJClipsSaveResultFailed : NSObject<SJClipsSaveResultFailed>
@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)toString {
     switch ( _reason ) {
         case SJClipsSaveResultToAlbumFailedReasonAuthDenied:
-            return SJVideoPlayerConfigurations.shared.localizedStrings.albumAuthDeniedPrompt;
+            return SJCommonCodeConfigurations.shared.localizedStrings.albumAuthDeniedPrompt;
     }
 }
 @end
@@ -42,32 +42,32 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @implementation SJClipsSaveResultToAlbumHandler
-- (void)saveResult:(id<SJVideoPlayerClipsResult>)result completionHandler:(void (^)(BOOL, id<SJClipsSaveResultFailed> _Nonnull))completionHandler {
+- (void)saveResult:(id<SJCommonCodeClipsResult>)result completionHandler:(void (^)(BOOL, id<SJClipsSaveResultFailed> _Nonnull))completionHandler {
     _completionHandler = completionHandler;
     
     switch ( result.operation ) {
-        case SJVideoPlayerClipsOperation_Unknown:
+        case SJCommonCodeClipsOperation_Unknown:
             break;
-        case SJVideoPlayerClipsOperation_Screenshot: {
+        case SJCommonCodeClipsOperation_Screenshot: {
             [self _saveScreenshot:result];
         }
             break;
-        case SJVideoPlayerClipsOperation_Export: {
+        case SJCommonCodeClipsOperation_Export: {
             [self _saveVideo:result];
         }
             break;
-        case SJVideoPlayerClipsOperation_GIF: {
+        case SJCommonCodeClipsOperation_GIF: {
             [self _saveGIF:result];
         }
             break;
     }
 }
 
-- (void)_saveScreenshot:(id<SJVideoPlayerClipsResult>)result {
+- (void)_saveScreenshot:(id<SJCommonCodeClipsResult>)result {
     UIImageWriteToSavedPhotosAlbum(result.image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
 }
 
-- (void)_saveGIF:(id<SJVideoPlayerClipsResult>)result {
+- (void)_saveGIF:(id<SJCommonCodeClipsResult>)result {
     __weak typeof(self) _self = self;
     if ( @available(iOS 9.0, *) ) {
         [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
@@ -112,7 +112,7 @@ NS_ASSUME_NONNULL_BEGIN
     }
 }
 
-- (void)_saveVideo:(id<SJVideoPlayerClipsResult>)result {
+- (void)_saveVideo:(id<SJCommonCodeClipsResult>)result {
     UISaveVideoAtPathToSavedPhotosAlbum(result.fileURL.path, self, @selector(video:didFinishSavingWithError:contextInfo:), NULL);
 }
 

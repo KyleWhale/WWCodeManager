@@ -2,23 +2,23 @@
 //  SJSmallViewControlLayer.m
 //  Pods
 //
-//  Created by 畅三江 on 2019/6/6.
+//  Created by admin on 2019/6/6.
 //
 
 #import "SJSmallViewControlLayer.h"
 #import "UIView+SJAnimationAdded.h"
-#import "SJVideoPlayerConfigurations.h"
-#if __has_include(<SJBaseVideoPlayer/SJBaseVideoPlayer.h>)
-#import <SJBaseVideoPlayer/SJBaseVideoPlayer.h>
+#import "SJCommonCodeConfigurations.h"
+#if __has_include(<SJBaseCommonCode/SJBaseCommonCode.h>)
+#import <SJBaseCommonCode/SJBaseCommonCode.h>
 #else
-#import "SJBaseVideoPlayer.h" 
+#import "SJBaseCommonCode.h" 
 #endif
 
 NS_ASSUME_NONNULL_BEGIN
 SJEdgeControlButtonItemTag const SJSmallViewControlLayerTopItem_Close = 10000;
 
 @interface SJSmallViewControlLayer ()
-@property (nonatomic, weak, nullable) __kindof SJBaseVideoPlayer *player;
+@property (nonatomic, weak, nullable) __kindof SJBaseCommonCode *player;
 @end
 
 @implementation SJSmallViewControlLayer
@@ -35,8 +35,8 @@ SJEdgeControlButtonItemTag const SJSmallViewControlLayerTopItem_Close = 10000;
     return self;
 }
 
-- (void)installedControlViewToVideoPlayer:(__kindof SJBaseVideoPlayer *)videoPlayer {
-    _player = videoPlayer;
+- (void)installedControlViewToCommonCode:(__kindof SJBaseCommonCode *)commonCode {
+    _player = commonCode;
 }
 
 - (void)restartControlLayer {
@@ -66,17 +66,17 @@ SJEdgeControlButtonItemTag const SJSmallViewControlLayerTopItem_Close = 10000;
     
     SJEdgeControlButtonItem *closeItem = [SJEdgeControlButtonItem placeholderWithType:SJButtonItemPlaceholderType_49x49 tag:SJSmallViewControlLayerTopItem_Close];
     [closeItem addAction:[SJEdgeControlButtonItemAction actionWithTarget:self action:@selector(tappedCloseItem:)]];
-    closeItem.image = SJVideoPlayerConfigurations.shared.resources.floatSmallViewCloseImage;
+    closeItem.image = SJCommonCodeConfigurations.shared.resources.floatSmallViewCloseImage;
     [self.topAdapter addItem:closeItem];
     
     [self.topAdapter reload];
 }
 
-- (void)controlLayerNeedAppear:(__kindof SJBaseVideoPlayer *)videoPlayer { }
+- (void)controlLayerNeedAppear:(__kindof SJBaseCommonCode *)commonCode { }
 
-- (void)controlLayerNeedDisappear:(__kindof SJBaseVideoPlayer *)videoPlayer { }
+- (void)controlLayerNeedDisappear:(__kindof SJBaseCommonCode *)commonCode { }
 
-- (BOOL)canTriggerRotationOfVideoPlayer:(__kindof SJBaseVideoPlayer *)videoPlayer {
+- (BOOL)canTriggerRotationOfCommonCode:(__kindof SJBaseCommonCode *)commonCode {
     return NO;
 }
 @end

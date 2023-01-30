@@ -2,16 +2,16 @@
 //  SJControlLayerDefines.h
 //  Pods
 //
-//  Created by 畅三江 on 2018/6/1.
-//  Copyright © 2018年 畅三江. All rights reserved.
+//  Created by admin on 2018/6/1.
+//  Copyright © 2018年 admin. All rights reserved.
 //
 
 #ifndef SJControlLayerDefines_h
 #define SJControlLayerDefines_h
-#if __has_include(<SJBaseVideoPlayer/SJBaseVideoPlayer.h>)
-#import <SJBaseVideoPlayer/SJVideoPlayerControlLayerProtocol.h>
+#if __has_include(<SJBaseCommonCode/SJBaseCommonCode.h>)
+#import <SJBaseCommonCode/SJCommonCodeControlLayerProtocol.h>
 #else
-#import "SJVideoPlayerControlLayerProtocol.h"
+#import "SJCommonCodeControlLayerProtocol.h"
 #endif
 @protocol SJControlLayerRestartProtocol, SJControlLayerExitProtocol;
 typedef long SJControlLayerIdentifier;
@@ -21,8 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 控制层协议
 ///
 @protocol SJControlLayer <
-    SJVideoPlayerControlLayerDataSource,
-    SJVideoPlayerControlLayerDelegate,
+    SJCommonCodeControlLayerDataSource,
+    SJCommonCodeControlLayerDelegate,
     SJControlLayerRestartProtocol,
     SJControlLayerExitProtocol
 >

@@ -1,14 +1,14 @@
 //
 //  SJClipsGIFRecordsControlLayer.h
-//  SJVideoPlayer
+//  SJCommonCode
 //
-//  Created by 畅三江 on 2019/1/20.
-//  Copyright © 2019 畅三江. All rights reserved.
+//  Created by admin on 2019/1/20.
+//  Copyright © 2019 admin. All rights reserved.
 //
 
 #import "SJEdgeControlLayerAdapters.h"
 #import "SJControlLayerDefines.h"
-#import "SJVideoPlayerClipsDefines.h"
+#import "SJCommonCodeClipsDefines.h"
 
 NS_ASSUME_NONNULL_BEGIN
 //SJClipsStatus_Unknown,

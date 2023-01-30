@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) UIEdgeInsets layoutInsets; // default value is (20, 20, 20, 20).
 @property (nonatomic) CGFloat layoutHeight; // default value is 0. If `0`, the height of the watermark image will be used for layout.
 
-- (void)layoutWatermarkInRect:(CGRect)rect videoPresentationSize:(CGSize)vSize videoGravity:(SJVideoGravity)videoGravity;
+- (void)layoutWatermarkInRect:(CGRect)rect videoPresentationSize:(CGSize)vSize spGravity:(SJSPGravity)spGravity;
 
 @end
 

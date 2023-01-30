@@ -1,8 +1,8 @@
 //
 //  SJControlLayerAppearManagerDefines.h
-//  SJBaseVideoPlayer
+//  SJBaseCommonCode
 //
-//  Created by 畅三江 on 2018/12/31.
+//  Created by admin on 2018/12/31.
 //
 
 #ifndef SJControlLayerAppearManagerProtocol_h

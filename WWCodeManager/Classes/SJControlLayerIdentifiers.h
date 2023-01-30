@@ -1,6 +1,6 @@
 //
 //  SJControlLayerIdentifiers.h
-//  SJVideoPlayer
+//  SJCommonCode
 //
 //  Created by BlueDancer on 2020/12/31.
 //

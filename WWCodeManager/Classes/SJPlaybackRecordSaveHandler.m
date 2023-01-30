@@ -1,6 +1,6 @@
 //
 //  SJPlaybackRecordSaveHandler.m
-//  SJVideoPlayer_Example
+//  SJCommonCode_Example
 //
 //  Created by BlueDancer on 2020/2/20.
 //  Copyright © 2020 changsanjiang. All rights reserved.
@@ -10,12 +10,12 @@
 
 #import "SJPlaybackRecordSaveHandler.h"
 #import <objc/message.h>
-#import "SJBaseVideoPlayerConst.h"
-#import "SJBaseVideoPlayer.h"
+#import "SJBaseCommonCodeConst.h"
+#import "SJBaseCommonCode.h"
 
 NS_ASSUME_NONNULL_BEGIN
 @implementation SJPlaybackRecordSaveHandler {
-    SJPlayerEventObserver *_observer;
+    SJBFCodeEventObserver *_observer;
     id<SJPlaybackHistoryController> _controller;
 }
 
@@ -23,18 +23,18 @@ NS_ASSUME_NONNULL_BEGIN
     static id obj = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        obj = [SJPlaybackRecordSaveHandler.alloc initWithEvents:SJPlayerEventMaskAll playbackHistoryController:SJPlaybackHistoryController.shared];
+        obj = [SJPlaybackRecordSaveHandler.alloc initWithEvents:SJBFCodeEventMaskAll playbackHistoryController:SJPlaybackHistoryController.shared];
     });
     return obj;
 }
 
-- (instancetype)initWithEvents:(SJPlayerEventMask)events playbackHistoryController:(id<SJPlaybackHistoryController>)controller;
+- (instancetype)initWithEvents:(SJBFCodeEventMask)events playbackHistoryController:(id<SJPlaybackHistoryController>)controller;
  {
     self = [super init];
     if ( self ) {
         _controller = controller;
         __weak typeof(self) _self = self;
-        _observer = [SJPlayerEventObserver.alloc initWithEvents:events handler:^(id  _Nonnull target, SJPlayerEvent event) {
+        _observer = [SJBFCodeEventObserver.alloc initWithEvents:events handler:^(id  _Nonnull target, SJBFCodeEvent event) {
             __strong typeof(_self) self = _self;
             if ( !self ) return;
             [self _target:target event:event];
@@ -43,46 +43,46 @@ NS_ASSUME_NONNULL_BEGIN
     return self;
 }
 
-- (void)setEvents:(SJPlayerEventMask)events {
+- (void)setEvents:(SJBFCodeEventMask)events {
     _observer.events = events;
 }
 
-- (SJPlayerEventMask)events {
+- (SJBFCodeEventMask)events {
     return _observer.events;
 }
 
-- (void)_target:(id)target event:(SJPlayerEvent)event {
+- (void)_target:(id)target event:(SJBFCodeEvent)event {
     switch ( event ) {
-        case SJPlayerEventPlaybackDidPause: {
-            SJBaseVideoPlayer *player = target;
+        case SJBFCodeEventPlaybackDidPause: {
+            SJBaseCommonCode *player = target;
             if ( player.isPaused ) {
                 [self _saveForPlayer:player];
             }
         }
             break;
-        case SJPlayerEventPlaybackWillRefresh:
-        case SJPlayerEventURLAssetWillChange:
-        case SJPlayerEventPlaybackWillStop:
-        case SJPlayerEventApplicationDidEnterBackground:
-        case SJPlayerEventApplicationWillTerminate:
+        case SJBFCodeEventPlaybackWillRefresh:
+        case SJBFCodeEventResourceWillChange:
+        case SJBFCodeEventPlaybackWillStop:
+        case SJBFCodeEventApplicationDidEnterBackground:
+        case SJBFCodeEventApplicationWillTerminate:
             [self _saveForPlayer:target];
             break;
-        case SJPlayerEventPlaybackControllerWillDeallocate:
+        case SJBFCodeEventPlaybackControllerWillDeallocate:
             [self _saveForPlaybackController:target];
             break;
     }
 }
 
-- (void)_saveForPlayer:(SJBaseVideoPlayer *)player {
-    SJPlaybackRecord *record = player.URLAsset.record;
+- (void)_saveForPlayer:(SJBaseCommonCode *)player {
+    SJPlaybackRecord *record = player.resource.record;
     if ( record != nil ) {
         record.position = player.currentTime;
         [self _saveRecord:record];
     }
 }
 
-- (void)_saveForPlaybackController:(id<SJVideoPlayerPlaybackController>)playbackController {
-    SJPlaybackRecord *record = ((SJVideoPlayerURLAsset *)playbackController.media).record;
+- (void)_saveForPlaybackController:(id<SJCommonCodePlaybackController>)playbackController {
+    SJPlaybackRecord *record = ((SJCommonCodeResource *)playbackController.media).record;
     if ( record != nil ) {
         record.position = playbackController.currentTime;
         [self _saveRecord:record];
@@ -97,7 +97,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 @end
 
-@implementation SJVideoPlayerURLAsset (SJPlaybackRecordSaveHandlerExtended)
+@implementation SJCommonCodeResource (SJPlaybackRecordSaveHandlerExtended)
 - (void)setRecord:(nullable SJPlaybackRecord *)record {
     objc_setAssociatedObject(self, @selector(record), record, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
@@ -107,22 +107,22 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
-@implementation SJPlayerEventObserver {
-    void(^_block)(id target, SJPlayerEvent event);
+@implementation SJBFCodeEventObserver {
+    void(^_block)(id target, SJBFCodeEvent event);
 }
-- (instancetype)initWithEvents:(SJPlayerEventMask)events handler:(void(^)(id target, SJPlayerEvent event))block {
+- (instancetype)initWithEvents:(SJBFCodeEventMask)events handler:(void(^)(id target, SJBFCodeEvent event))block {
     self = [super init];
     if ( self ) {
         _events = events;
         _block = block;
         
-        [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_timeControlStatusDidChange:) name:SJVideoPlayerPlaybackTimeControlStatusDidChangeNotification object:nil];
-        [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_URLAssetWillChange:) name:SJVideoPlayerURLAssetWillChangeNotification object:nil];
-        [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_playbackWillStop:) name:SJVideoPlayerPlaybackWillStopNotification object:nil];
-        [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_playbackWillRefresh:) name:SJVideoPlayerPlaybackWillRefreshNotification object:nil];
-        [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_didEnterBackground:) name:SJVideoPlayerApplicationDidEnterBackgroundNotification object:nil];
-        [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_willTerminate:) name:SJVideoPlayerApplicationWillTerminateNotification object:nil];
-        [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_playbackControllerWillDeallocate:) name:SJVideoPlayerPlaybackControllerWillDeallocateNotification object:nil];
+        [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_timeControlStatusDidChange:) name:SJCommonCodePlaybackTimeControlStatusDidChangeNotification object:nil];
+        [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_ResourceWillChange:) name:SJCommonCodeResourceWillChangeNotification object:nil];
+        [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_playbackWillStop:) name:SJCommonCodePlaybackWillStopNotification object:nil];
+        [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_playbackWillRefresh:) name:SJCommonCodePlaybackWillRefreshNotification object:nil];
+        [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_didEnterBackground:) name:SJCommonCodeApplicationDidEnterBackgroundNotification object:nil];
+        [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_willTerminate:) name:SJCommonCodeApplicationWillTerminateNotification object:nil];
+        [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_playbackControllerWillDeallocate:) name:SJCommonCodePlaybackControllerWillDeallocateNotification object:nil];
     }
     return self;
 }
@@ -132,47 +132,47 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)_timeControlStatusDidChange:(NSNotification *)note {
-    if ( _events & SJPlayerEventMaskPlaybackDidPause ) {
-        SJBaseVideoPlayer *player = note.object;
+    if ( _events & SJBFCodeEventMaskPlaybackDidPause ) {
+        SJBaseCommonCode *player = note.object;
         if ( player.isPaused ) {
-            if ( _block ) _block(player, SJPlayerEventPlaybackDidPause);
+            if ( _block ) _block(player, SJBFCodeEventPlaybackDidPause);
         }
     }
 }
 
-- (void)_URLAssetWillChange:(NSNotification *)note {
-    if ( _events & SJPlayerEventMaskURLAssetWillChange ) {
-        if ( _block ) _block(note.object, SJPlayerEventURLAssetWillChange);
+- (void)_ResourceWillChange:(NSNotification *)note {
+    if ( _events & SJBFCodeEventMaskResourceWillChange ) {
+        if ( _block ) _block(note.object, SJBFCodeEventResourceWillChange);
     }
 }
 
 - (void)_playbackWillStop:(NSNotification *)note {
-    if ( _events & SJPlayerEventMaskPlaybackWillStop ) {
-        if ( _block ) _block(note.object, SJPlayerEventPlaybackWillStop);
+    if ( _events & SJBFCodeEventMaskPlaybackWillStop ) {
+        if ( _block ) _block(note.object, SJBFCodeEventPlaybackWillStop);
     }
 }
 
 - (void)_playbackWillRefresh:(NSNotification *)note {
-    if ( _events & SJPlayerEventMaskPlaybackWillRefresh ) {
-        if ( _block ) _block(note.object, SJPlayerEventPlaybackWillRefresh);
+    if ( _events & SJBFCodeEventMaskPlaybackWillRefresh ) {
+        if ( _block ) _block(note.object, SJBFCodeEventPlaybackWillRefresh);
     }
 }
 
 - (void)_didEnterBackground:(NSNotification *)note {
-    if ( _events & SJPlayerEventMaskApplicationDidEnterBackground ) {
-        if ( _block ) _block(note.object, SJPlayerEventApplicationDidEnterBackground);
+    if ( _events & SJBFCodeEventMaskApplicationDidEnterBackground ) {
+        if ( _block ) _block(note.object, SJBFCodeEventApplicationDidEnterBackground);
     }
 }
 
 - (void)_willTerminate:(NSNotification *)note {
-    if ( _events & SJPlayerEventMaskApplicationWillTerminate ) {
-        if ( _block ) _block(note.object, SJPlayerEventApplicationWillTerminate);
+    if ( _events & SJBFCodeEventMaskApplicationWillTerminate ) {
+        if ( _block ) _block(note.object, SJBFCodeEventApplicationWillTerminate);
     }
 }
 
 - (void)_playbackControllerWillDeallocate:(NSNotification *)note {
-    if ( _events & SJPlayerEventMaskPlaybackControllerWillDeallocate ) {
-        if ( _block ) _block(note.object, SJPlayerEventPlaybackControllerWillDeallocate);
+    if ( _events & SJBFCodeEventMaskPlaybackControllerWillDeallocate ) {
+        if ( _block ) _block(note.object, SJBFCodeEventPlaybackControllerWillDeallocate);
     }
 }
 @end

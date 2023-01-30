@@ -2,11 +2,11 @@
 //  SJFullscreenModeStatusBar.m
 //  Pods
 //
-//  Created by 畅三江 on 2019/12/11.
+//  Created by admin on 2019/12/11.
 //
 
 #import "SJFullscreenModeStatusBar.h"
-#import "SJVideoPlayerConfigurations.h"
+#import "SJCommonCodeConfigurations.h"
 #if __has_include(<Masonry/Masonry.h>)
 #import <Masonry/Masonry.h>
 #else
@@ -105,7 +105,7 @@ NS_ASSUME_NONNULL_BEGIN
         _dateFormatter.dateFormat = @"HH:mm";
         
         [self _setupViews];
-        [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_updateSettings) name:SJVideoPlayerConfigurationsDidUpdateNotification object:nil];
+        [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_updateSettings) name:SJCommonCodeConfigurationsDidUpdateNotification object:nil];
         [self _updateSettings];
         [self _reload];
     }
@@ -143,7 +143,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)_reload {
-    id<SJVideoPlayerLocalizedStrings> strings = SJVideoPlayerConfigurations.shared.localizedStrings;
+    id<SJCommonCodeLocalizedStrings> strings = SJCommonCodeConfigurations.shared.localizedStrings;
     switch ( _networkStatus ) {
         case SJNetworkStatus_NotReachable:
             _networkStatusLabel.text = strings.noNetWork;
@@ -217,7 +217,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)_updateSettings {
-    id<SJVideoPlayerControlLayerResources> sources = SJVideoPlayerConfigurations.shared.resources;
+    id<SJCommonCodeControlLayerResources> sources = SJCommonCodeConfigurations.shared.resources;
     _batteryNubImageView.image = sources.batteryNubImage;
     _batteryView.image = sources.batteryBorderImage;
     _batteryView.lightningImageView.image = sources.batteryLightningImage;

@@ -9,11 +9,11 @@
 #define SJWatermarkViewDefines_h
 
 #import <UIKit/UIKit.h>
-#import "SJVideoPlayerPlaybackControllerDefines.h"
+#import "SJCommonCodePlaybackControllerDefines.h"
 
 @protocol SJWatermarkView <NSObject>
 
-- (void)layoutWatermarkInRect:(CGRect)rect videoPresentationSize:(CGSize)vSize videoGravity:(SJVideoGravity)videoGravity;
+- (void)layoutWatermarkInRect:(CGRect)rect videoPresentationSize:(CGSize)vSize spGravity:(SJSPGravity)spGravity;
 
 @end
 

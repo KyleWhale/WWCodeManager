@@ -2,7 +2,7 @@
 //  SJCommonProgressSlider.h
 //  SJProgressSlider
 //
-//  Created by 畅三江 on 2017/11/20.
+//  Created by admin on 2017/11/20.
 //  Copyright © 2017年 changsanjiang. All rights reserved.
 //
 

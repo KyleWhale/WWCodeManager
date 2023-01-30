@@ -2,7 +2,7 @@
 //  SJSQLiteCore.h
 //  Pods-SJSQLite3_Example
 //
-//  Created by 畅三江 on 2019/6/18.
+//  Created by admin on 2019/6/18.
 //  Copyright © 2019 SanJiang. All rights reserved.
 //
 

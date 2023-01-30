@@ -1,6 +1,6 @@
 //
 //  SJDeviceVolumeAndBrightness.m
-//  SJBaseVideoPlayer
+//  SJBaseCommonCode
 //
 //  Created by 蓝舞者 on 2022/10/14.
 //

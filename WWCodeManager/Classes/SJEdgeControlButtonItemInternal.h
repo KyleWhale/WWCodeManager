@@ -2,7 +2,7 @@
 //  SJEdgeControlButtonItemInternal.h
 //  Pods
 //
-//  Created by 畅三江 on 2022/7/14.
+//  Created by admin on 2022/7/14.
 //
 
 #import "SJEdgeControlButtonItem.h"

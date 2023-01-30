@@ -2,7 +2,7 @@
 //  SJRotationManagerDefines.h
 //  Pods
 //
-//  Created by 畅三江 on 2018/9/19.
+//  Created by admin on 2018/9/19.
 //
 
 #ifndef SJRotationManagerProtocol_h

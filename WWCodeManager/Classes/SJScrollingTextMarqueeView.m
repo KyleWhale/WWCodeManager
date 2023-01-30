@@ -1,8 +1,8 @@
 //
 //  SJScrollingTextMarqueeView.m
-//  SJVideoPlayer_Example
+//  SJCommonCode_Example
 //
-//  Created by 畅三江 on 2019/12/7.
+//  Created by admin on 2019/12/7.
 //  Copyright © 2019 changsanjiang. All rights reserved.
 //
 
@@ -12,12 +12,12 @@
 #else
 #import "NSAttributedString+SJMake.h"
 #endif
-#if __has_include(<SJBaseVideoPlayer/CALayer+SJBaseVideoPlayerExtended.h>)
-#import <SJBaseVideoPlayer/CALayer+SJBaseVideoPlayerExtended.h>
-#import <SJBaseVideoPlayer/UIView+SJBaseVideoPlayerExtended.h>
+#if __has_include(<SJBaseCommonCode/CALayer+SJBaseCommonCodeExtended.h>)
+#import <SJBaseCommonCode/CALayer+SJBaseCommonCodeExtended.h>
+#import <SJBaseCommonCode/UIView+SJBaseCommonCodeExtended.h>
 #else
-#import "CALayer+SJBaseVideoPlayerExtended.h"
-#import "UIView+SJBaseVideoPlayerExtended.h"
+#import "CALayer+SJBaseCommonCodeExtended.h"
+#import "UIView+SJBaseCommonCodeExtended.h"
 #endif
 
 

@@ -38,7 +38,7 @@
     _layoutInsets = UIEdgeInsetsMake(20, 20, 20, 20);
 }
 
-- (void)layoutWatermarkInRect:(CGRect)rect videoPresentationSize:(CGSize)vSize videoGravity:(SJVideoGravity)videoGravity {
+- (void)layoutWatermarkInRect:(CGRect)rect videoPresentationSize:(CGSize)vSize spGravity:(SJSPGravity)spGravity {
     CGSize imageSize = self.image.size;
     self.hidden = CGSizeEqualToSize(vSize, CGSizeZero) ||
                   CGSizeEqualToSize(rect.size, CGSizeZero) ||
@@ -47,7 +47,7 @@
         return;
     
     CGSize videoDisplayedSize = CGSizeZero;
-    if      ( videoGravity == AVLayerVideoGravityResizeAspect ) {
+    if      ( spGravity == AVLayerVideoGravityResizeAspect ) {
         // 等比例模式
         // 16/9 的会将宽度进行等比缩放, 以显示全部高度
         // 9/16 的会将高度进行等比缩放, 以显示全部宽度
@@ -55,7 +55,7 @@
                                 CGSizeMake(rect.size.width, vSize.height * rect.size.width / vSize.width) :
                                 CGSizeMake(vSize.width * rect.size.height / vSize.height, rect.size.height);
     }
-    else if ( videoGravity == AVLayerVideoGravityResizeAspectFill ) {
+    else if ( spGravity == AVLayerVideoGravityResizeAspectFill ) {
         // 填充模式
         // 16/9 的会将宽度进行等比拉伸, 以显示全部高度
         // 9/16 的会将高度进行等比拉伸, 以显示全部宽度
@@ -63,7 +63,7 @@
                                 CGSizeMake(vSize.width * rect.size.height / vSize.height, rect.size.height) :
                                 CGSizeMake(rect.size.width, vSize.height * rect.size.width / vSize.width);
     }
-    else if ( videoGravity == AVLayerVideoGravityResizeAspect ) {
+    else if ( spGravity == AVLayerVideoGravityResizeAspect ) {
         videoDisplayedSize = rect.size;
     }
     

@@ -6,8 +6,8 @@
 //
 
 #import "SJSpeedupPlaybackPopupView.h"
-#import "SJVideoPlayerConfigurations.h"
-#import "CALayer+SJBaseVideoPlayerExtended.h"
+#import "SJCommonCodeConfigurations.h"
+#import "CALayer+SJBaseCommonCodeExtended.h"
 #import "NSAttributedString+SJMake.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
     self = [super initWithFrame:frame];
     if ( self ) {
         [self _setupViews];
-        [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_updateSettings) name:SJVideoPlayerConfigurationsDidUpdateNotification object:nil];
+        [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_updateSettings) name:SJCommonCodeConfigurationsDidUpdateNotification object:nil];
         [self _updateSettings];
         self.rate = 2.0;
     }
@@ -43,8 +43,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setRate:(CGFloat)rate {
     if ( rate != _rate ) {
         _rate = rate;
-        id<SJVideoPlayerControlLayerResources> sources = SJVideoPlayerConfigurations.shared.resources;
-        id<SJVideoPlayerLocalizedStrings> strings = SJVideoPlayerConfigurations.shared.localizedStrings;
+        id<SJCommonCodeControlLayerResources> sources = SJCommonCodeConfigurations.shared.resources;
+        id<SJCommonCodeLocalizedStrings> strings = SJCommonCodeConfigurations.shared.localizedStrings;
         NSAttributedString *text = [NSAttributedString sj_UIKitText:^(id<SJUIKitTextMakerProtocol>  _Nonnull make) {
             make.append([NSString stringWithFormat:@"%.01fx", rate]).textColor(sources.speedupPlaybackRateTextColor).font(sources.speedupPlaybackRateTextFont);
             if ( strings.longPressSpeedupPlayback.length != 0 ) {
@@ -156,7 +156,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)_updateSettings {
-    id<SJVideoPlayerControlLayerResources> sources = SJVideoPlayerConfigurations.shared.resources;
+    id<SJCommonCodeControlLayerResources> sources = SJCommonCodeConfigurations.shared.resources;
     for ( CAShapeLayer *layer in _triangles ) {
         layer.strokeColor = layer.fillColor = sources.speedupPlaybackTriangleColor.CGColor;
     }

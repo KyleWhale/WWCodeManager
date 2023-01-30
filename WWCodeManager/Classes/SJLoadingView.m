@@ -2,11 +2,11 @@
 //  SJLoadingView.m
 //  Pods
 //
-//  Created by 畅三江 on 2019/11/27.
+//  Created by admin on 2019/11/27.
 //
 
 #import "SJLoadingView.h"
-#import "SJVideoPlayerConfigurations.h"
+#import "SJCommonCodeConfigurations.h"
 #if __has_include(<Masonry/Masonry.h>)
 #import <Masonry/Masonry.h>
 #else
@@ -146,7 +146,7 @@ NS_ASSUME_NONNULL_BEGIN
     if ( !self ) return nil;
     [self _setupView];
     [self _updateSettings];
-    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_updateSettings) name:SJVideoPlayerConfigurationsDidUpdateNotification object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_updateSettings) name:SJCommonCodeConfigurationsDidUpdateNotification object:nil];
     return self;
 }
 
@@ -225,7 +225,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)_updateSettings {
-    _animationView.lineColor = SJVideoPlayerConfigurations.shared.resources.loadingLineColor;
+    _animationView.lineColor = SJCommonCodeConfigurations.shared.resources.loadingLineColor;
 }
 @end
 NS_ASSUME_NONNULL_END

@@ -1,8 +1,8 @@
 //
 //  SJTimerControl.h
-//  SJVideoPlayerProject
+//  SJCommonCodeProject
 //
-//  Created by 畅三江 on 2017/12/6.
+//  Created by admin on 2017/12/6.
 //  Copyright © 2017年 changsanjiang. All rights reserved.
 //
 

@@ -2,7 +2,7 @@
 //  SJPlaybackHistoryController.h
 //  Pods
 //
-//  Created by 畅三江 on 2020/2/19.
+//  Created by admin on 2020/2/19.
 //
 
 #import <Foundation/Foundation.h>
@@ -50,8 +50,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-extern SJMediaType const SJMediaTypeVideo;
-extern SJMediaType const SJMediaTypeAudio;
+extern SJMTType const SJMTTypeVideo;
+extern SJMTType const SJMTTypeAudio;
 
 ///
 /// \code
@@ -59,7 +59,7 @@ extern SJMediaType const SJMediaTypeAudio;
 ///    SJPlaybackRecord *record = SJPlaybackRecord.alloc.init;
 ///    record.mediaId = media.id;
 ///    record.userId = user.id; // The user id of the current login
-///    record.mediaType = SJMediaTypeVideo;
+///    record.mediaType = SJMTTypeVideo;
 ///    record.position = _player.currentTime;
 ///    record.title = media.title; // 可对record扩充自定义属性, 详情请前往`SJPlaybackHistoryController.h`查看
 ///    [SJPlaybackHistoryController.shared save:record];
@@ -79,17 +79,17 @@ extern SJMediaType const SJMediaTypeAudio;
 ///
 /// 查询, 如不存在将返回 nil
 ///
-- (nullable SJPlaybackRecord *)recordForMedia:(NSInteger)mediaId user:(NSInteger)userId mediaType:(SJMediaType)mediaType;
+- (nullable SJPlaybackRecord *)recordForMedia:(NSInteger)mediaId user:(NSInteger)userId mediaType:(SJMTType)mediaType;
 
 ///
 /// 查询
 ///
-- (nullable NSArray<SJPlaybackRecord *> *)recordsForUser:(NSInteger)userId mediaType:(SJMediaType)mediaType range:(NSRange)range;
+- (nullable NSArray<SJPlaybackRecord *> *)recordsForUser:(NSInteger)userId mediaType:(SJMTType)mediaType range:(NSRange)range;
 
 ///
 /// 查询
 ///
-- (nullable NSArray<SJPlaybackRecord *> *)recordsForUser:(NSInteger)userId mediaType:(SJMediaType)mediaType;
+- (nullable NSArray<SJPlaybackRecord *> *)recordsForUser:(NSInteger)userId mediaType:(SJMTType)mediaType;
 
 ///
 /// 查询
@@ -99,7 +99,7 @@ extern SJMediaType const SJMediaTypeAudio;
 ///    // 根据指定的`用户id`以及`mediaType`进行查询, 并将结果排序(以更新的时间倒序排列), 返回满足条件的前20条数据
 ///    NSArray *records = [SJPlaybackHistoryController.shared recordsForConditions:@[
 ///        [SJSQLite3Condition conditionWithColumn:@"userId" value:@(userId)],
-///        [SJSQLite3Condition conditionWithColumn:@"mediaType" value:SJMediaTypeVideo],
+///        [SJSQLite3Condition conditionWithColumn:@"mediaType" value:SJMTTypeVideo],
 ///    ] orderBy:@[
 ///        [SJSQLite3ColumnOrder orderWithColumn:@"updatedTime" ascending:NO]
 ///    ] range:NSMakeRange(0, 20)];
@@ -114,7 +114,7 @@ extern SJMediaType const SJMediaTypeAudio;
 ///    // 根据指定的`用户id`以及`mediaType`进行查询, 并将结果排序(以更新的时间倒序排列), 返回满足条件的数据
 ///    NSArray *records = [SJPlaybackHistoryController.shared recordsForConditions:@[
 ///        [SJSQLite3Condition conditionWithColumn:@"userId" value:@(userId)],
-///        [SJSQLite3Condition conditionWithColumn:@"mediaType" value:SJMediaTypeVideo],
+///        [SJSQLite3Condition conditionWithColumn:@"mediaType" value:SJMTTypeVideo],
 ///    ] orderBy:@[
 ///        [SJSQLite3ColumnOrder orderWithColumn:@"updatedTime" ascending:NO]
 ///    ]];
@@ -127,7 +127,7 @@ extern SJMediaType const SJMediaTypeAudio;
 ///
 /// 查询数量
 ///
-- (NSUInteger)countOfRecordsForUser:(NSInteger)userId mediaType:(SJMediaType)mediaType;
+- (NSUInteger)countOfRecordsForUser:(NSInteger)userId mediaType:(SJMTType)mediaType;
 
 ///
 /// 查询数量
@@ -136,7 +136,7 @@ extern SJMediaType const SJMediaTypeAudio;
 ///    // 根据指定的`用户id`以及`mediaType`进行查询
 ///    [SJPlaybackHistoryController.shared countOfRecordsForConditions:@[
 ///        [SJSQLite3Condition conditionWithColumn:@"userId" value:@(userId)],
-///        [SJSQLite3Condition conditionWithColumn:@"mediaType" value:SJMediaTypeVideo],
+///        [SJSQLite3Condition conditionWithColumn:@"mediaType" value:SJMTTypeVideo],
 ///    ]];
 /// \endcode
 ///
@@ -147,12 +147,12 @@ extern SJMediaType const SJMediaTypeAudio;
 ///
 /// 删除
 ///
-- (void)remove:(NSInteger)media user:(NSInteger)userId mediaType:(SJMediaType)mediaType;
+- (void)remove:(NSInteger)media user:(NSInteger)userId mediaType:(SJMTType)mediaType;
 
 ///
 /// 删除
 ///
-- (void)removeAllRecordsForUser:(NSInteger)userId mediaType:(SJMediaType)mediaType;
+- (void)removeAllRecordsForUser:(NSInteger)userId mediaType:(SJMTType)mediaType;
 
 ///
 /// 删除
@@ -160,7 +160,7 @@ extern SJMediaType const SJMediaTypeAudio;
 /// \code
 ///    [SJPlaybackHistoryController.shared removeForConditions:@[
 ///        [SJSQLite3Condition conditionWithColumn:@"userId" value:@(userId)],
-///        [SJSQLite3Condition conditionWithColumn:@"mediaType" value:SJMediaTypeVideo],
+///        [SJSQLite3Condition conditionWithColumn:@"mediaType" value:SJMTTypeVideo],
 ///    ]];
 /// \endcode
 ///

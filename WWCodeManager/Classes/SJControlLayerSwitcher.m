@@ -1,18 +1,18 @@
 //
 //  SJControlLayerSwitcher.m
-//  SJVideoPlayerProject
+//  SJCommonCodeProject
 //
-//  Created by 畅三江 on 2018/6/1.
-//  Copyright © 2018年 畅三江. All rights reserved.
+//  Created by admin on 2018/6/1.
+//  Copyright © 2018年 admin. All rights reserved.
 //
 
 #import "SJControlLayerSwitcher.h"
 
 NS_ASSUME_NONNULL_BEGIN
 SJControlLayerIdentifier SJControlLayer_Uninitialized = LONG_MAX;
-static NSString *const SJPlayerSwitchControlLayerUserInfoKey = @"SJPlayerSwitchControlLayerUserInfoKey";
-static NSNotificationName const SJPlayerWillBeginSwitchControlLayerNotification = @"SJPlayerWillBeginSwitchControlLayerNotification";
-static NSNotificationName const SJPlayerDidEndSwitchControlLayerNotification = @"SJPlayerDidEndSwitchControlLayerNotification";
+static NSString *const SJBFCodeSwitchControlLayerUserInfoKey = @"SJBFCodeSwitchControlLayerUserInfoKey";
+static NSNotificationName const SJBFCodeWillBeginSwitchControlLayerNotification = @"SJBFCodeWillBeginSwitchControlLayerNotification";
+static NSNotificationName const SJBFCodeDidEndSwitchControlLayerNotification = @"SJBFCodeDidEndSwitchControlLayerNotification";
 
 @interface SJControlLayerSwitcherObserver : NSObject<SJControlLayerSwitcherObserver>
 - (instancetype)initWithSwitcher:(id<SJControlLayerSwitcher>)switcher;
@@ -24,9 +24,9 @@ static NSNotificationName const SJPlayerDidEndSwitchControlLayerNotification = @
 - (instancetype)initWithSwitcher:(id<SJControlLayerSwitcher>)switcher {
     self = [super init];
     if ( !self ) return nil; 
-    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(willBeginSwitchControlLayer:) name:SJPlayerWillBeginSwitchControlLayerNotification object:switcher];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(willBeginSwitchControlLayer:) name:SJBFCodeWillBeginSwitchControlLayerNotification object:switcher];
     
-    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(didEndSwitchControlLayer:) name:SJPlayerDidEndSwitchControlLayerNotification object:switcher];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(didEndSwitchControlLayer:) name:SJBFCodeDidEndSwitchControlLayerNotification object:switcher];
     return self;
 }
 
@@ -35,16 +35,16 @@ static NSNotificationName const SJPlayerDidEndSwitchControlLayerNotification = @
 }
 
 - (void)willBeginSwitchControlLayer:(NSNotification *)note {
-    if ( self.playerWillBeginSwitchControlLayer ) self.playerWillBeginSwitchControlLayer(note.object, note.userInfo[SJPlayerSwitchControlLayerUserInfoKey]);
+    if ( self.playerWillBeginSwitchControlLayer ) self.playerWillBeginSwitchControlLayer(note.object, note.userInfo[SJBFCodeSwitchControlLayerUserInfoKey]);
 }
 
 - (void)didEndSwitchControlLayer:(NSNotification *)note {
-    if ( self.playerDidEndSwitchControlLayer ) self.playerDidEndSwitchControlLayer(note.object, note.userInfo[SJPlayerSwitchControlLayerUserInfoKey]);
+    if ( self.playerDidEndSwitchControlLayer ) self.playerDidEndSwitchControlLayer(note.object, note.userInfo[SJBFCodeSwitchControlLayerUserInfoKey]);
 }
 @end
 
 @interface SJControlLayerSwitcher ()
-@property (nonatomic, weak, nullable) SJBaseVideoPlayer *videoPlayer;
+@property (nonatomic, weak, nullable) SJBaseCommonCode *commonCode;
 @property (nonatomic, strong, readonly) NSMutableDictionary *map;
 @end
 
@@ -60,10 +60,10 @@ static NSNotificationName const SJPlayerDidEndSwitchControlLayerNotification = @
 }
 #endif
 
-- (instancetype)initWithPlayer:(__weak SJBaseVideoPlayer *)videoPlayer {
+- (instancetype)initWithPlayer:(__weak SJBaseCommonCode *)commonCode {
     self = [super init];
     if ( !self ) return nil;
-    _videoPlayer = videoPlayer;
+    _commonCode = commonCode;
     _map = [NSMutableDictionary dictionary];
     _previousIdentifier = SJControlLayer_Uninitialized;
     _currentIdentifier = SJControlLayer_Uninitialized;
@@ -80,7 +80,7 @@ static NSNotificationName const SJPlayerDidEndSwitchControlLayerNotification = @
             return;
     }
 
-    id<SJControlLayer> _Nullable oldValue = (id)self.videoPlayer.controlLayerDataSource;
+    id<SJControlLayer> _Nullable oldValue = (id)self.commonCode.controlLayerDataSource;
     id<SJControlLayer> _Nullable newValue = [self controlLayerForIdentifier:identifier];
     if ( !newValue && _resolveControlLayer ) {
         newValue = _resolveControlLayer(identifier);
@@ -93,27 +93,27 @@ static NSNotificationName const SJPlayerDidEndSwitchControlLayerNotification = @
         return;
     
     // - begin -
-    [NSNotificationCenter.defaultCenter postNotificationName:SJPlayerWillBeginSwitchControlLayerNotification object:self userInfo:newValue?@{SJPlayerSwitchControlLayerUserInfoKey:newValue}:nil];
+    [NSNotificationCenter.defaultCenter postNotificationName:SJBFCodeWillBeginSwitchControlLayerNotification object:self userInfo:newValue?@{SJBFCodeSwitchControlLayerUserInfoKey:newValue}:nil];
 
     [oldValue exitControlLayer];
-    _videoPlayer.controlLayerDataSource = nil;
-    _videoPlayer.controlLayerDelegate = nil;
+    _commonCode.controlLayerDataSource = nil;
+    _commonCode.controlLayerDelegate = nil;
 
     // update identifiers
     _previousIdentifier = _currentIdentifier;
     _currentIdentifier = identifier;
 
-    _videoPlayer.controlLayerDataSource = newValue;
-    _videoPlayer.controlLayerDelegate = newValue;
+    _commonCode.controlLayerDataSource = newValue;
+    _commonCode.controlLayerDelegate = newValue;
     [newValue restartControlLayer];
     
     // - end -
-    [NSNotificationCenter.defaultCenter postNotificationName:SJPlayerDidEndSwitchControlLayerNotification object:self userInfo:@{SJPlayerSwitchControlLayerUserInfoKey:newValue}];
+    [NSNotificationCenter.defaultCenter postNotificationName:SJBFCodeDidEndSwitchControlLayerNotification object:self userInfo:@{SJBFCodeSwitchControlLayerUserInfoKey:newValue}];
 }
 
 - (BOOL)switchToPreviousControlLayer {
     if ( self.previousIdentifier == SJControlLayer_Uninitialized ) return NO;
-    if ( !self.videoPlayer ) return NO;
+    if ( !self.commonCode ) return NO;
     [self switchControlLayerForIdentifier:self.previousIdentifier];
     return YES;
 }

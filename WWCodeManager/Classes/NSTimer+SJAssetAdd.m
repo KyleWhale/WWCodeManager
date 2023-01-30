@@ -1,8 +1,8 @@
 //
 //  NSTimer+SJAssetAdd.m
-//  SJVideoPlayerAssetCarrier
+//  SJCommonCodeAssetCarrier
 //
-//  Created by 畅三江 on 2018/5/21.
+//  Created by admin on 2018/5/21.
 //  Copyright © 2018年 changsanjiang. All rights reserved.
 //
 

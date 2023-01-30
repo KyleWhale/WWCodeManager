@@ -1,8 +1,8 @@
 //
 //  SJRotationFullscreenWindow.m
-//  SJVideoPlayer_Example
+//  SJCommonCode_Example
 //
-//  Created by 畅三江 on 2022/8/13.
+//  Created by admin on 2022/8/13.
 //  Copyright © 2022 changsanjiang. All rights reserved.
 //
 

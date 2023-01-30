@@ -1,6 +1,6 @@
 //
 //  SJPlaybackRecordSaveHandler.h
-//  SJVideoPlayer_Example
+//  SJCommonCode_Example
 //
 //  Created by BlueDancer on 2020/2/20.
 //  Copyright © 2020 changsanjiang. All rights reserved.
@@ -12,75 +12,75 @@
 
 #import <Foundation/Foundation.h>
 #import "SJPlaybackHistoryController.h"
-typedef NS_ENUM(NSUInteger, SJPlayerEvent) {
+typedef NS_ENUM(NSUInteger, SJBFCodeEvent) {
     ///
     /// 播放器资源将要改变时
     ///
-    SJPlayerEventURLAssetWillChange,
+    SJBFCodeEventResourceWillChange,
     ///
     /// 播放控制将要销毁前
     ///
-    SJPlayerEventPlaybackControllerWillDeallocate,
+    SJBFCodeEventPlaybackControllerWillDeallocate,
     ///
     /// 播放器执行了暂停
     ///
-    SJPlayerEventPlaybackDidPause,
+    SJBFCodeEventPlaybackDidPause,
     ///
     /// 播放器将要执行stop前
     ///
-    SJPlayerEventPlaybackWillStop,
+    SJBFCodeEventPlaybackWillStop,
     ///
     /// 播放器将要执行refresh前
     ///
-    SJPlayerEventPlaybackWillRefresh,
+    SJBFCodeEventPlaybackWillRefresh,
     
     
     ///
     /// 播放器接收到App进入后台时
     ///
-    SJPlayerEventApplicationDidEnterBackground,
+    SJBFCodeEventApplicationDidEnterBackground,
     ///
     /// 播放器接收到App将要销毁时
     ///
-    SJPlayerEventApplicationWillTerminate,
+    SJBFCodeEventApplicationWillTerminate,
 };
 
-typedef NS_OPTIONS(NSUInteger, SJPlayerEventMask) {
-    SJPlayerEventMaskURLAssetWillChange = 1 << SJPlayerEventURLAssetWillChange,
+typedef NS_OPTIONS(NSUInteger, SJBFCodeEventMask) {
+    SJBFCodeEventMaskResourceWillChange = 1 << SJBFCodeEventResourceWillChange,
     
-    SJPlayerEventMaskPlaybackControllerWillDeallocate = 1 << SJPlayerEventPlaybackControllerWillDeallocate,
-    SJPlayerEventMaskPlaybackDidPause = 1 << SJPlayerEventPlaybackDidPause,
-    SJPlayerEventMaskPlaybackWillStop = 1 << SJPlayerEventPlaybackWillStop,
-    SJPlayerEventMaskPlaybackWillRefresh = 1 << SJPlayerEventPlaybackWillRefresh,
+    SJBFCodeEventMaskPlaybackControllerWillDeallocate = 1 << SJBFCodeEventPlaybackControllerWillDeallocate,
+    SJBFCodeEventMaskPlaybackDidPause = 1 << SJBFCodeEventPlaybackDidPause,
+    SJBFCodeEventMaskPlaybackWillStop = 1 << SJBFCodeEventPlaybackWillStop,
+    SJBFCodeEventMaskPlaybackWillRefresh = 1 << SJBFCodeEventPlaybackWillRefresh,
     
-    SJPlayerEventMaskApplicationDidEnterBackground = 1 << SJPlayerEventApplicationDidEnterBackground,
-    SJPlayerEventMaskApplicationWillTerminate = 1 << SJPlayerEventApplicationWillTerminate,
+    SJBFCodeEventMaskApplicationDidEnterBackground = 1 << SJBFCodeEventApplicationDidEnterBackground,
+    SJBFCodeEventMaskApplicationWillTerminate = 1 << SJBFCodeEventApplicationWillTerminate,
     
-    SJPlayerEventMaskPlaybackEvents = SJPlayerEventMaskPlaybackControllerWillDeallocate | SJPlayerEventMaskPlaybackWillStop | SJPlayerEventMaskPlaybackWillRefresh | SJPlayerEventMaskPlaybackDidPause,
+    SJBFCodeEventMaskPlaybackEvents = SJBFCodeEventMaskPlaybackControllerWillDeallocate | SJBFCodeEventMaskPlaybackWillStop | SJBFCodeEventMaskPlaybackWillRefresh | SJBFCodeEventMaskPlaybackDidPause,
     
-    SJPlayerEventMaskApplicationEvents = SJPlayerEventMaskApplicationDidEnterBackground | SJPlayerEventMaskApplicationWillTerminate,
+    SJBFCodeEventMaskApplicationEvents = SJBFCodeEventMaskApplicationDidEnterBackground | SJBFCodeEventMaskApplicationWillTerminate,
     
-    SJPlayerEventMaskAll = (SJPlayerEventMaskURLAssetWillChange | SJPlayerEventMaskPlaybackEvents | SJPlayerEventMaskApplicationEvents),
+    SJBFCodeEventMaskAll = (SJBFCodeEventMaskResourceWillChange | SJBFCodeEventMaskPlaybackEvents | SJBFCodeEventMaskApplicationEvents),
 };
  
 NS_ASSUME_NONNULL_BEGIN
-@interface SJVideoPlayerURLAsset (SJPlaybackRecordSaveHandlerExtended)
+@interface SJCommonCodeResource (SJPlaybackRecordSaveHandlerExtended)
 @property (nonatomic, strong, nullable) SJPlaybackRecord *record;
 @end
 
 
 @interface SJPlaybackRecordSaveHandler : NSObject
 + (instancetype)shared;
-- (instancetype)initWithEvents:(SJPlayerEventMask)events playbackHistoryController:(id<SJPlaybackHistoryController>)controller;
+- (instancetype)initWithEvents:(SJBFCodeEventMask)events playbackHistoryController:(id<SJPlaybackHistoryController>)controller;
 
 /// 设置保存的时机(当发生某个事件之后, handler内部会自动保存播放记录)
-@property (nonatomic) SJPlayerEventMask events;
+@property (nonatomic) SJBFCodeEventMask events;
 @end
 
 
-@interface SJPlayerEventObserver : NSObject
-- (instancetype)initWithEvents:(SJPlayerEventMask)events handler:(void(^)(id target, SJPlayerEvent event))block;
-@property (nonatomic) SJPlayerEventMask events;
+@interface SJBFCodeEventObserver : NSObject
+- (instancetype)initWithEvents:(SJBFCodeEventMask)events handler:(void(^)(id target, SJBFCodeEvent event))block;
+@property (nonatomic) SJBFCodeEventMask events;
 @end
 NS_ASSUME_NONNULL_END
 

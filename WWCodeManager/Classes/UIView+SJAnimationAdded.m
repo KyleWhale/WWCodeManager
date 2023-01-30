@@ -1,14 +1,14 @@
 //
 //  UIView+SJAnimationAdded.m
-//  SJVideoPlayer
+//  SJCommonCode
 //
-//  Created by 畅三江 on 2018/10/23.
-//  Copyright © 2018 畅三江. All rights reserved.
+//  Created by admin on 2018/10/23.
+//  Copyright © 2018 admin. All rights reserved.
 //
 
 #import "UIView+SJAnimationAdded.h"
 #import <objc/message.h>
-#import "SJVideoPlayerConfigurations.h"
+#import "SJCommonCodeConfigurations.h"
 
 NS_ASSUME_NONNULL_BEGIN
 @implementation UIView (SJAnimationAdded)
@@ -111,7 +111,7 @@ sj_view_makeAppear(NSArray<UIView *> *views, BOOL animated, void(^_Nullable comp
         view.sjv_disappeared = NO;
         [UIView animateWithDuration:0 animations:^{} completion:^(BOOL finished) {
             if ( animated ) {
-                [UIView animateWithDuration:SJVideoPlayerConfigurations.shared.animationDuration animations:^{
+                [UIView animateWithDuration:SJCommonCodeConfigurations.shared.animationDuration animations:^{
                     [view sjv_appear];
                 } completion:^(BOOL finished) {
                     if ( view == views.lastObject && completionHandler ) completionHandler();
@@ -136,7 +136,7 @@ sj_view_makeDisappear(NSArray<UIView *> *views, BOOL animated, void(^_Nullable c
         view.sjv_disappeared = YES;
         [UIView animateWithDuration:0 animations:^{} completion:^(BOOL finished) {
             if ( animated ) {
-                [UIView animateWithDuration:SJVideoPlayerConfigurations.shared.animationDuration animations:^{
+                [UIView animateWithDuration:SJCommonCodeConfigurations.shared.animationDuration animations:^{
                     [view sjv_disapear];
                 } completion:^(BOOL finished) {
                     if ( view == views.lastObject && completionHandler ) completionHandler();

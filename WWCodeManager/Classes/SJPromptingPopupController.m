@@ -2,11 +2,11 @@
 //  SJPromptingPopupController.m
 //  Pods
 //
-//  Created by 畅三江 on 2019/7/12.
+//  Created by admin on 2019/7/12.
 //
 
 #import "SJPromptingPopupController.h"
-#import "SJBaseVideoPlayerConst.h"
+#import "SJBaseCommonCodeConst.h"
 #if __has_include(<Masonry/Masonry.h>)
 #import <Masonry/Masonry.h>
 #else
@@ -54,7 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if ( self ) {
-        self.layer.zPosition = SJPlayerZIndexes.shared.promptingPopupViewZIndex;
+        self.layer.zPosition = SJBFCodeZIndexes.shared.promptingPopupViewZIndex;
     }
     return self;
 }

@@ -1,8 +1,8 @@
 //
 //  SJRotationManager_iOS_9_15.m
-//  SJVideoPlayer_Example
+//  SJCommonCode_Example
 //
-//  Created by 畅三江 on 2022/8/13.
+//  Created by admin on 2022/8/13.
 //  Copyright © 2022 changsanjiang. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 #import "SJRotationFullscreenViewController.h"
 #import "SJRotationManagerInternal.h"
 #import "SJRotationDefines.h"
-#import "UIView+SJBaseVideoPlayerExtended.h"
+#import "UIView+SJBaseCommonCodeExtended.h"
 @class SJRotationFullscreenViewController_iOS_9_15;
 
 API_DEPRECATED("deprecated!", ios(9.0, 16.0)) @protocol SJRotationFullscreenViewControllerDelegate_iOS_9_15 <SJRotationFullscreenViewControllerDelegate>

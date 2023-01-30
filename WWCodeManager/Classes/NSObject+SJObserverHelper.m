@@ -2,7 +2,7 @@
 //  NSObject+SJObserverHelper.h
 //  TmpProject
 //
-//  Created by 畅三江 on 2017/12/8.
+//  Created by admin on 2017/12/8.
 //  Copyright © 2017年 changsanjiang. All rights reserved.
 //
 //  GitHub:     https://github.com/changsanjiang/SJObserverHelper

@@ -1,8 +1,8 @@
 //
 //  SJPlayModel.h
-//  SJVideoPlayerAssetCarrier
+//  SJCommonCodeAssetCarrier
 //
-//  Created by 畅三江 on 2018/6/28.
+//  Created by admin on 2018/6/28.
 //  Copyright © 2018年 changsanjiang. All rights reserved.
 //
 
@@ -376,7 +376,7 @@ __deprecated_msg("use `playModel.nextPlayModel` and `playModel.scrollViewSelecto
                                                                          rootCollectionView:(__weak UICollectionView *)rootCollectionView __deprecated_msg("use `nextPlayModel`!");
 @end
 
-@protocol SJPlayerDefaultSelectors <NSObject>
+@protocol SJBFCodeDefaultSelectors <NSObject>
 @property (nonatomic, readonly) id playerSuperview;
 @property (nonatomic, readonly) id collectionView;
 @end

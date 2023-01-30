@@ -2,7 +2,7 @@
 //  SJPlaybackHistoryController.m
 //  Pods
 //
-//  Created by 畅三江 on 2020/2/19.
+//  Created by admin on 2020/2/19.
 //
 
 #import "SJPlaybackHistoryController.h"
@@ -17,8 +17,8 @@
 #endif
 
 NS_ASSUME_NONNULL_BEGIN
-SJMediaType const SJMediaTypeVideo = @"video";
-SJMediaType const SJMediaTypeAudio = @"audio";
+SJMTType const SJMTTypeVideo = @"video";
+SJMTType const SJMTTypeAudio = @"audio";
 
 @implementation SJPlaybackRecord(SJSQLite3Extended)
 + (nullable NSString *)sql_primaryKey {
@@ -39,7 +39,7 @@ SJMediaType const SJMediaTypeAudio = @"audio";
     static id obj = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0] stringByAppendingPathComponent:@"com.SJBaseVideoPlayer.history/sj.db"];
+        NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0] stringByAppendingPathComponent:@"com.SJBaseCommonCode.history/sj.db"];
         obj = [SJPlaybackHistoryController.alloc initWithPath:path];
     });
     return obj;
@@ -63,7 +63,7 @@ SJMediaType const SJMediaTypeAudio = @"audio";
     }
 }
 
-- (nullable SJPlaybackRecord *)recordForMedia:(NSInteger)mediaId user:(NSInteger)userId mediaType:(SJMediaType)mediaType {
+- (nullable SJPlaybackRecord *)recordForMedia:(NSInteger)mediaId user:(NSInteger)userId mediaType:(SJMTType)mediaType {
     NSParameterAssert(mediaType);
     return [self recordsForConditions:@[
         [SJSQLite3Condition conditionWithColumn:@"mediaId" value:@(mediaId)],
@@ -72,7 +72,7 @@ SJMediaType const SJMediaTypeAudio = @"audio";
     ] orderBy:nil].lastObject;
 }
 
-- (nullable NSArray<SJPlaybackRecord *> *)recordsForUser:(NSInteger)userId mediaType:(SJMediaType)mediaType range:(NSRange)range {
+- (nullable NSArray<SJPlaybackRecord *> *)recordsForUser:(NSInteger)userId mediaType:(SJMTType)mediaType range:(NSRange)range {
     return [self recordsForConditions:@[
         [SJSQLite3Condition conditionWithColumn:@"userId" value:@(userId)],
         [SJSQLite3Condition conditionWithColumn:@"mediaType" value:mediaType],
@@ -81,7 +81,7 @@ SJMediaType const SJMediaTypeAudio = @"audio";
     ] range:range];
 }
 
-- (nullable NSArray<SJPlaybackRecord *> *)recordsForUser:(NSInteger)userId mediaType:(SJMediaType)mediaType {
+- (nullable NSArray<SJPlaybackRecord *> *)recordsForUser:(NSInteger)userId mediaType:(SJMTType)mediaType {
     return [self recordsForUser:userId mediaType:mediaType range:NSMakeRange(0, NSUIntegerMax)];
 }
 
@@ -93,7 +93,7 @@ SJMediaType const SJMediaTypeAudio = @"audio";
     return [_sqlite objectsForClass:SJPlaybackRecord.class conditions:conditions orderBy:orders range:range error:NULL];
 }
 
-- (NSUInteger)countOfRecordsForUser:(NSInteger)userId mediaType:(SJMediaType)mediaType {
+- (NSUInteger)countOfRecordsForUser:(NSInteger)userId mediaType:(SJMTType)mediaType {
     return [self countOfRecordsForConditions:@[
         [SJSQLite3Condition conditionWithColumn:@"userId" value:@(userId)],
         [SJSQLite3Condition conditionWithColumn:@"mediaType" value:mediaType],
@@ -104,14 +104,14 @@ SJMediaType const SJMediaTypeAudio = @"audio";
     return [_sqlite countOfObjectsForClass:SJPlaybackRecord.class conditions:conditions error:NULL];
 }
 
-- (void)remove:(NSInteger)media user:(NSInteger)userId mediaType:(SJMediaType)mediaType {
+- (void)remove:(NSInteger)media user:(NSInteger)userId mediaType:(SJMTType)mediaType {
     NSParameterAssert(mediaType);
     SJPlaybackRecord *record = [self recordForMedia:media user:userId mediaType:mediaType];
     if ( record == nil ) return;
     [_sqlite removeObjectsForClass:SJPlaybackRecord.class primaryKeyValues:@[@(record.id)] error:NULL];
 }
 
-- (void)removeAllRecordsForUser:(NSInteger)userId mediaType:(SJMediaType)mediaType {
+- (void)removeAllRecordsForUser:(NSInteger)userId mediaType:(SJMTType)mediaType {
     NSParameterAssert(mediaType);
     [_sqlite removeAllObjectsForClass:SJPlaybackRecord.class conditions:@[
         [SJSQLite3Condition conditionWithColumn:@"userId" value:@(userId)],

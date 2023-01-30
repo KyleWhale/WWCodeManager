@@ -2,7 +2,7 @@
 //  SJSubtitlePopupControllerDefines.h
 //  Pods
 //
-//  Created by 畅三江 on 2019/11/8.
+//  Created by admin on 2019/11/8.
 //
 
 #ifndef SJSubtitlePopupControllerDefines_h

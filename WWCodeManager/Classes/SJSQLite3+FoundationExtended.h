@@ -2,7 +2,7 @@
 //  SJSQLite3+FoundationExtended.h
 //  SJUIKit
 //
-//  Created by 畅三江 on 2019/10/21.
+//  Created by admin on 2019/10/21.
 //
 
 #import "SJSQLite3.h"

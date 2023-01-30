@@ -2,7 +2,7 @@
 //  SJFullscreenModeStatusBar.h
 //  Pods
 //
-//  Created by 畅三江 on 2019/12/11.
+//  Created by admin on 2019/12/11.
 //
 
 #import <UIKit/UIKit.h>

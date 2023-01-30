@@ -1,17 +1,17 @@
 //
 //  SJControlLayerSwitcher.h
-//  SJVideoPlayerProject
+//  SJCommonCodeProject
 //
-//  Created by 畅三江 on 2018/6/1.
-//  Copyright © 2018年 畅三江. All rights reserved.
+//  Created by admin on 2018/6/1.
+//  Copyright © 2018年 admin. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import "SJControlLayerDefines.h"
-#if __has_include(<SJBaseVideoPlayer/SJBaseVideoPlayer.h>)
-#import <SJBaseVideoPlayer/SJBaseVideoPlayer.h>
+#if __has_include(<SJBaseCommonCode/SJBaseCommonCode.h>)
+#import <SJBaseCommonCode/SJBaseCommonCode.h>
 #else
-#import "SJBaseVideoPlayer.h"
+#import "SJBaseCommonCode.h"
 #endif
 @protocol SJControlLayerSwitcherObserver, SJControlLayerSwitcherDelegate;
 
@@ -20,9 +20,9 @@ extern SJControlLayerIdentifier SJControlLayer_Uninitialized;
 
 /// - 控制层切换器 switcher -
 ///
-/// - 使用示例请查看`SJVideoPlayer`的`init`方法.
+/// - 使用示例请查看`SJCommonCode`的`init`方法.
 @protocol SJControlLayerSwitcher <NSObject>
-- (instancetype)initWithPlayer:(__weak SJBaseVideoPlayer *)player;
+- (instancetype)initWithPlayer:(__weak SJBaseCommonCode *)player;
 
 /// 切换控制层
 ///

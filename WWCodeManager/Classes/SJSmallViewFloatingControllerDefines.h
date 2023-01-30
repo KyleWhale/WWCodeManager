@@ -2,7 +2,7 @@
 //  SJSmallViewFloatingControllerDefines.h
 //  Pods
 //
-//  Created by 畅三江 on 2019/6/6.
+//  Created by admin on 2019/6/6.
 //
 
 #ifndef SJSmallViewFloatingControllerDefines_h

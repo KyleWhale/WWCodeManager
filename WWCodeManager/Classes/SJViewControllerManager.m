@@ -1,12 +1,12 @@
 //
 //  SJViewControllerManager.m
-//  SJBaseVideoPlayer
+//  SJBaseCommonCode
 //
-//  Created by 畅三江 on 2019/11/23.
+//  Created by admin on 2019/11/23.
 //
 
 #import "SJViewControllerManager.h"
-#import "UIView+SJBaseVideoPlayerExtended.h"
+#import "UIView+SJBaseCommonCodeExtended.h"
 #import "SJRotationManagerInternal.h"
 
 NS_ASSUME_NONNULL_BEGIN

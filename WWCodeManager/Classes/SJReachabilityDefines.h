@@ -2,7 +2,7 @@
 //  SJReachabilityDefines
 //  Project
 //
-//  Created by 畅三江 on 2018/6/1.
+//  Created by admin on 2018/6/1.
 //  Copyright © 2018年 changsanjiang. All rights reserved.
 //
 
@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  这个枚举列出了网络的3种状态值, 用来标识当前的网络状态, 你可以像下面这样获取当前的网络状态:
  ```
- _videoPlayer.networkStatus;
+ _commonCode.networkStatus;
  ```
  */
 typedef NS_ENUM(NSInteger, SJNetworkStatus) {

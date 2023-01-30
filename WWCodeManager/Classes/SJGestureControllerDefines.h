@@ -2,7 +2,7 @@
 //  SJGestureControllerDefines.h
 //  Pods
 //
-//  Created by 畅三江 on 2019/1/3.
+//  Created by admin on 2019/1/3.
 //
 
 #ifndef SJGestureControllerProtocol_h
@@ -10,32 +10,32 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-typedef NS_ENUM(NSUInteger, SJPlayerGestureType) {
+typedef NS_ENUM(NSUInteger, SJBFCodeGestureType) {
     /// 单击手势
-    SJPlayerGestureType_SingleTap,
+    SJBFCodeGestureType_SingleTap,
     /// 双击手势
-    SJPlayerGestureType_DoubleTap,
+    SJBFCodeGestureType_DoubleTap,
     /// 移动手势
-    SJPlayerGestureType_Pan,
+    SJBFCodeGestureType_Pan,
     /// 捏合手势
-    SJPlayerGestureType_Pinch,
+    SJBFCodeGestureType_Pinch,
     /// 长按手势
-    SJPlayerGestureType_LongPress,
+    SJBFCodeGestureType_LongPress,
 };
 
-typedef NS_OPTIONS(NSUInteger, SJPlayerGestureTypeMask) {
-    SJPlayerGestureTypeMask_None,
-    SJPlayerGestureTypeMask_SingleTap   = 1 << SJPlayerGestureType_SingleTap,
-    SJPlayerGestureTypeMask_DoubleTap   = 1 << SJPlayerGestureType_DoubleTap,
-    SJPlayerGestureTypeMask_Pan_H       = 0x100, // 水平方向
-    SJPlayerGestureTypeMask_Pan_V       = 0x200, // 垂直方向
-    SJPlayerGestureTypeMask_Pan         = SJPlayerGestureTypeMask_Pan_H | SJPlayerGestureTypeMask_Pan_V,
-    SJPlayerGestureTypeMask_Pinch       = 1 << SJPlayerGestureType_Pinch,
-    SJPlayerGestureTypeMask_LongPress   = 1 << SJPlayerGestureType_LongPress,
+typedef NS_OPTIONS(NSUInteger, SJBFCodeGestureTypeMask) {
+    SJBFCodeGestureTypeMask_None,
+    SJBFCodeGestureTypeMask_SingleTap   = 1 << SJBFCodeGestureType_SingleTap,
+    SJBFCodeGestureTypeMask_DoubleTap   = 1 << SJBFCodeGestureType_DoubleTap,
+    SJBFCodeGestureTypeMask_Pan_H       = 0x100, // 水平方向
+    SJBFCodeGestureTypeMask_Pan_V       = 0x200, // 垂直方向
+    SJBFCodeGestureTypeMask_Pan         = SJBFCodeGestureTypeMask_Pan_H | SJBFCodeGestureTypeMask_Pan_V,
+    SJBFCodeGestureTypeMask_Pinch       = 1 << SJBFCodeGestureType_Pinch,
+    SJBFCodeGestureTypeMask_LongPress   = 1 << SJBFCodeGestureType_LongPress,
     
     
-    SJPlayerGestureTypeMask_Default = SJPlayerGestureTypeMask_SingleTap | SJPlayerGestureTypeMask_DoubleTap | SJPlayerGestureTypeMask_Pan | SJPlayerGestureTypeMask_Pinch,
-    SJPlayerGestureTypeMask_All = SJPlayerGestureTypeMask_Default | SJPlayerGestureTypeMask_LongPress,
+    SJBFCodeGestureTypeMask_Default = SJBFCodeGestureTypeMask_SingleTap | SJBFCodeGestureTypeMask_DoubleTap | SJBFCodeGestureTypeMask_Pan | SJBFCodeGestureTypeMask_Pinch,
+    SJBFCodeGestureTypeMask_All = SJBFCodeGestureTypeMask_Default | SJBFCodeGestureTypeMask_LongPress,
 };
 
 /// 移动方向
@@ -65,16 +65,16 @@ typedef NS_ENUM(NSUInteger, SJLongPressGestureRecognizerState) {
 };
 
 @protocol SJGestureController <NSObject>
-@property (nonatomic) SJPlayerGestureTypeMask supportedGestureTypes; ///< default value is .Default
-@property (nonatomic, copy, nullable) BOOL(^gestureRecognizerShouldTrigger)(id<SJGestureController> control, SJPlayerGestureType type, CGPoint location);
+@property (nonatomic) SJBFCodeGestureTypeMask supportedGestureTypes; ///< default value is .Default
+@property (nonatomic, copy, nullable) BOOL(^gestureRecognizerShouldTrigger)(id<SJGestureController> control, SJBFCodeGestureType type, CGPoint location);
 @property (nonatomic, copy, nullable) void(^singleTapHandler)(id<SJGestureController> control, CGPoint location);
 @property (nonatomic, copy, nullable) void(^doubleTapHandler)(id<SJGestureController> control, CGPoint location);
 @property (nonatomic, copy, nullable) void(^panHandler)(id<SJGestureController> control, SJPanGestureTriggeredPosition position, SJPanGestureMovingDirection direction, SJPanGestureRecognizerState state, CGPoint translate);
 @property (nonatomic, copy, nullable) void(^pinchHandler)(id<SJGestureController> control, CGFloat scale);
 @property (nonatomic, copy, nullable) void(^longPressHandler)(id<SJGestureController> control, SJLongPressGestureRecognizerState state);
 
-- (void)cancelGesture:(SJPlayerGestureType)type;
-- (UIGestureRecognizerState)stateOfGesture:(SJPlayerGestureType)type;
+- (void)cancelGesture:(SJBFCodeGestureType)type;
+- (UIGestureRecognizerState)stateOfGesture:(SJBFCodeGestureType)type;
 
 @property (nonatomic, readonly) SJPanGestureMovingDirection movingDirection;
 @property (nonatomic, readonly) SJPanGestureTriggeredPosition triggeredPosition;

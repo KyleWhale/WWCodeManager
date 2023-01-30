@@ -1,8 +1,8 @@
 //
 //  SJClipsResultShareItem.m
-//  SJVideoPlayerProject
+//  SJCommonCodeProject
 //
-//  Created by 畅三江 on 2018/4/12.
+//  Created by admin on 2018/4/12.
 //  Copyright © 2018年 changsanjiang. All rights reserved.
 //
 

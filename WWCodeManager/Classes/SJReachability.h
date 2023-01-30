@@ -2,7 +2,7 @@
 //  SJReachabilityObserver.h
 //  Project
 //
-//  Created by 畅三江 on 2018/12/28.
+//  Created by admin on 2018/12/28.
 //  Copyright © 2018 changsanjiang. All rights reserved.
 //
 

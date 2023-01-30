@@ -1,13 +1,13 @@
 //
 //  SJLoadFailedControlLayer.m
-//  SJVideoPlayer
+//  SJCommonCode
 //
-//  Created by 畅三江 on 2018/10/27.
-//  Copyright © 2018 畅三江. All rights reserved.
+//  Created by admin on 2018/10/27.
+//  Copyright © 2018 admin. All rights reserved.
 //
 
 #import "SJLoadFailedControlLayer.h"
-#import "SJVideoPlayerConfigurations.h"
+#import "SJCommonCodeConfigurations.h"
 
 NS_ASSUME_NONNULL_BEGIN
 @interface SJLoadFailedControlLayer ()
@@ -22,8 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)_updateSettings {
-    id<SJVideoPlayerControlLayerResources> resources = SJVideoPlayerConfigurations.shared.resources;
-    id<SJVideoPlayerLocalizedStrings> strings = SJVideoPlayerConfigurations.shared.localizedStrings;
+    id<SJCommonCodeControlLayerResources> resources = SJCommonCodeConfigurations.shared.resources;
+    id<SJCommonCodeLocalizedStrings> strings = SJCommonCodeConfigurations.shared.localizedStrings;
     [self.reloadView.button setTitle:strings.reload forState:UIControlStateNormal];
     self.reloadView.backgroundColor = resources.playFailedButtonBackgroundColor;
     self.promptLabel.text = strings.playbackFailedPrompt;

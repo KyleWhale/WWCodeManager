@@ -1,13 +1,13 @@
 //
 //  SJEdgeControlLayerAdapters.h
-//  SJVideoPlayer
+//  SJCommonCode
 //
-//  Created by 畅三江 on 2018/10/20.
-//  Copyright © 2018 畅三江. All rights reserved.
+//  Created by admin on 2018/10/20.
+//  Copyright © 2018 admin. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "SJVideoPlayerControlMaskView.h"
+#import "SJCommonCodeControlMaskView.h"
 #import "SJEdgeControlButtonItemAdapter.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -25,8 +25,8 @@ struct SJ_Screen {
     SJEdgeControlButtonItemAdapter *_Nullable _rightAdapter;
     SJEdgeControlButtonItemAdapter *_Nullable _centerAdapter;
     
-    SJVideoPlayerControlMaskView *_Nullable _topContainerView;
-    SJVideoPlayerControlMaskView *_Nullable _bottomContainerView;
+    SJCommonCodeControlMaskView *_Nullable _topContainerView;
+    SJCommonCodeControlMaskView *_Nullable _bottomContainerView;
     UIView *_Nullable _leftContainerView;
     UIView *_Nullable _rightContainerView;
     UIView *_Nullable _centerContainerView;
@@ -41,8 +41,8 @@ struct SJ_Screen {
 @property (nonatomic, strong, readonly) SJEdgeControlButtonItemAdapter *centerAdapter; // lazy load
 
 
-@property (nonatomic, strong, readonly) SJVideoPlayerControlMaskView *topContainerView;
-@property (nonatomic, strong, readonly) SJVideoPlayerControlMaskView *bottomContainerView;
+@property (nonatomic, strong, readonly) SJCommonCodeControlMaskView *topContainerView;
+@property (nonatomic, strong, readonly) SJCommonCodeControlMaskView *bottomContainerView;
 @property (nonatomic, strong, readonly) UIView *leftContainerView;
 @property (nonatomic, strong, readonly) UIView *rightContainerView;
 @property (nonatomic, strong, readonly) UIView *centerContainerView;

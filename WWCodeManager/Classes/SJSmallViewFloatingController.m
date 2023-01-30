@@ -2,12 +2,12 @@
 //  SJSmallViewFloatingController.m
 //  Pods
 //
-//  Created by 畅三江 on 2019/6/6.
+//  Created by admin on 2019/6/6.
 //
 
 #import "SJSmallViewFloatingController.h"
 #import <UIKit/UIGraphicsRendererSubclass.h>
-#import "UIView+SJBaseVideoPlayerExtended.h"
+#import "UIView+SJBaseCommonCodeExtended.h"
 #if __has_include(<SJUIKit/NSObject+SJObserverHelper.h>)
 #import <SJUIKit/NSObject+SJObserverHelper.h>
 #else

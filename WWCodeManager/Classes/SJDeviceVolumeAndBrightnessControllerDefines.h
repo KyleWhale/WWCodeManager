@@ -2,7 +2,7 @@
 //  SJDeviceVolumeAndBrightnessControllerProtocol.h
 //  Pods
 //
-//  Created by 畅三江 on 2019/1/5.
+//  Created by admin on 2019/1/5.
 //
 
 #ifndef SJDeviceVolumeAndBrightnessControllerProtocol_h

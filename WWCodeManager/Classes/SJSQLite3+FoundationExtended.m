@@ -2,7 +2,7 @@
 //  SJSQLite3+FoundationExtended.m
 //  SJUIKit
 //
-//  Created by 畅三江 on 2019/10/21.
+//  Created by admin on 2019/10/21.
 //
 
 #import "SJSQLite3+FoundationExtended.h"
@@ -115,16 +115,17 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (nullable id)objectForKey:(NSString *)key objectClass:(Class)cls {
-    NSString *jsonStr = [self jsonStringForKey:key];
-    if ( jsonStr.length == 0 )
+    NSString *var_jsonStr = [self jsonStringForKey:key];
+    if ( var_jsonStr.length == 0 )
         return nil;
 #if __has_include(<YYModel/YYModel.h>)
-    return [cls yy_modelWithJSON:jsonStr];
+    return [cls yy_modelWithJSON:var_jsonStr];
 #elif __has_include(<YYKit/YYKit.h>)
-    return [cls modelWithJSON:jsonStr];
+    return [cls modelWithJSON:var_jsonStr];
 #else
     NSAssert(NO, @"请导入YYModel或者YYKit");
 #endif
+    return nil;
 }
 
 - (nullable NSString *)jsonStringForKey:(NSString *)key {

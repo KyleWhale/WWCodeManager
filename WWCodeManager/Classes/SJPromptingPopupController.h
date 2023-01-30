@@ -2,7 +2,7 @@
 //  SJPromptingPopupController.h
 //  Pods
 //
-//  Created by 畅三江 on 2019/7/12.
+//  Created by admin on 2019/7/12.
 //
 
 #import "SJPromptingPopupControllerDefines.h"

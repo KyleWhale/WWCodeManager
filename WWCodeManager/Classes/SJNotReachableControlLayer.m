@@ -1,19 +1,19 @@
 //
 //  SJNotReachableControlLayer.m
-//  SJVideoPlayer
+//  SJCommonCode
 //
-//  Created by 畅三江 on 2019/1/15.
-//  Copyright © 2019 畅三江. All rights reserved.
+//  Created by admin on 2019/1/15.
+//  Copyright © 2019 admin. All rights reserved.
 //
 
 #import "SJNotReachableControlLayer.h"
 #import "UIView+SJAnimationAdded.h"
-#import "SJVideoPlayerConfigurations.h"
+#import "SJCommonCodeConfigurations.h"
 
-#if __has_include(<SJBaseVideoPlayer/SJBaseVideoPlayer.h>)
-#import <SJBaseVideoPlayer/SJBaseVideoPlayer.h>
+#if __has_include(<SJBaseCommonCode/SJBaseCommonCode.h>)
+#import <SJBaseCommonCode/SJBaseCommonCode.h>
 #else
-#import "SJBaseVideoPlayer.h"
+#import "SJBaseCommonCode.h"
 #endif
 #if __has_include(<Masonry/Masonry.h>)
 #import <Masonry/Masonry.h>
@@ -101,29 +101,29 @@ SJEdgeControlButtonItemTag const SJNotReachableControlLayerTopItem_Back = 10000;
     return self;
 }
 
-- (void)installedControlViewToVideoPlayer:(__kindof SJBaseVideoPlayer *)videoPlayer {
-    [self _updateItems:videoPlayer];
+- (void)installedControlViewToCommonCode:(__kindof SJBaseCommonCode *)commonCode {
+    [self _updateItems:commonCode];
 }
 
-- (BOOL)videoPlayer:(__kindof SJBaseVideoPlayer *)videoPlayer gestureRecognizerShouldTrigger:(SJPlayerGestureType)type location:(CGPoint)location {
+- (BOOL)commonCode:(__kindof SJBaseCommonCode *)commonCode gestureRecognizerShouldTrigger:(SJBFCodeGestureType)type location:(CGPoint)location {
     return NO;
 }
 
-- (void)controlLayerNeedAppear:(__kindof SJBaseVideoPlayer *)videoPlayer {}
-- (void)controlLayerNeedDisappear:(__kindof SJBaseVideoPlayer *)videoPlayer {}
+- (void)controlLayerNeedAppear:(__kindof SJBaseCommonCode *)commonCode {}
+- (void)controlLayerNeedDisappear:(__kindof SJBaseCommonCode *)commonCode {}
 
-- (void)videoPlayer:(__kindof SJBaseVideoPlayer *)videoPlayer onRotationTransitioningChanged:(BOOL)isTransitioning {
-    if ( isTransitioning ) [self _updateItems:videoPlayer];
+- (void)commonCode:(__kindof SJBaseCommonCode *)commonCode onRotationTransitioningChanged:(BOOL)isTransitioning {
+    if ( isTransitioning ) [self _updateItems:commonCode];
 }
 
-- (void)videoPlayer:(__kindof SJBaseVideoPlayer *)videoPlayer willFitOnScreen:(BOOL)isFitOnScreen {
-    [self _updateItems:videoPlayer];
+- (void)commonCode:(__kindof SJBaseCommonCode *)commonCode willFitOnScreen:(BOOL)isFitOnScreen {
+    [self _updateItems:commonCode];
 }
 
-- (void)_updateItems:(__kindof SJBaseVideoPlayer *)videoPlayer {
+- (void)_updateItems:(__kindof SJBaseCommonCode *)commonCode {
     SJEdgeControlButtonItem *backItem = [_topAdapter itemForTag:SJNotReachableControlLayerTopItem_Back];
-    BOOL isFitOnScreen = videoPlayer.isFitOnScreen;
-    BOOL isFull = videoPlayer.isFullscreen;
+    BOOL isFitOnScreen = commonCode.isFitOnScreen;
+    BOOL isFull = commonCode.isFullscreen;
     
     if ( backItem ) {
         if ( isFull || isFitOnScreen )
@@ -132,7 +132,7 @@ SJEdgeControlButtonItemTag const SJNotReachableControlLayerTopItem_Back = 10000;
             if ( _hiddenBackButtonWhenOrientationIsPortrait )
                 backItem.innerHidden = YES;
             else
-                backItem.innerHidden = videoPlayer.isPlayOnScrollView;
+                backItem.innerHidden = commonCode.isPlayOnScrollView;
         }
     }
     [_topAdapter reload];
@@ -143,8 +143,8 @@ SJEdgeControlButtonItemTag const SJNotReachableControlLayerTopItem_Back = 10000;
 - (void)_setupView {
     self.backgroundColor = [UIColor blackColor];
     
-    id<SJVideoPlayerControlLayerResources> sources = SJVideoPlayerConfigurations.shared.resources;
-    id<SJVideoPlayerLocalizedStrings> strings = SJVideoPlayerConfigurations.shared.localizedStrings;
+    id<SJCommonCodeControlLayerResources> sources = SJCommonCodeConfigurations.shared.resources;
+    id<SJCommonCodeLocalizedStrings> strings = SJCommonCodeConfigurations.shared.localizedStrings;
     
     SJEdgeControlButtonItem *backItem = [SJEdgeControlButtonItem placeholderWithType:SJButtonItemPlaceholderType_49x49 tag:SJNotReachableControlLayerTopItem_Back];
     [backItem addAction:[SJEdgeControlButtonItemAction actionWithTarget:self action:@selector(backItemWasTapped:)]];

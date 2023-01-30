@@ -2,7 +2,7 @@
 //  SJUTAttributes.h
 //  AttributesFactory
 //
-//  Created by 畅三江 on 2019/4/12.
+//  Created by admin on 2019/4/12.
 //  Copyright © 2019 SanJiang. All rights reserved.
 //
 

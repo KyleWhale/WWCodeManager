@@ -1,9 +1,9 @@
 //
 //  SJClipsControlLayer.m
-//  SJVideoPlayer
+//  SJCommonCode
 //
-//  Created by 畅三江 on 2019/1/19.
-//  Copyright © 2019 畅三江. All rights reserved.
+//  Created by admin on 2019/1/19.
+//  Copyright © 2019 admin. All rights reserved.
 //
 
 #import "SJClipsControlLayer.h"
@@ -12,10 +12,10 @@
 #else
 #import "Masonry.h"
 #endif
-#if __has_include(<SJBaseVideoPlayer/SJBaseVideoPlayer.h>)
-#import <SJBaseVideoPlayer/SJBaseVideoPlayer.h>
+#if __has_include(<SJBaseCommonCode/SJBaseCommonCode.h>)
+#import <SJBaseCommonCode/SJBaseCommonCode.h>
 #else
-#import "SJBaseVideoPlayer.h"  
+#import "SJBaseCommonCode.h"  
 #endif
 #if __has_include(<SJUIKit/SJAttributesFactory.h>)
 #import <SJUIKit/SJAttributesFactory.h>
@@ -30,9 +30,9 @@
 #import "SJClipsVideoRecordsControlLayer.h"
 #import "SJClipsResultsControlLayer.h"
 
-#import "SJVideoPlayerClipsParameters.h"
+#import "SJCommonCodeClipsParameters.h"
 #import "SJControlLayerSwitcher.h"
-#import "SJVideoPlayerConfigurations.h"
+#import "SJCommonCodeConfigurations.h"
 
 #import "SJEdgeControlButtonItemInternal.h"
 
@@ -49,7 +49,7 @@ static SJControlLayerIdentifier SJClipsResultsControlLayerIdentifier = 3;
 
 @interface SJClipsControlLayer ()
 @property (nonatomic, strong, nullable) SJControlLayerSwitcher *switcher;
-@property (nonatomic, weak, nullable) __kindof SJBaseVideoPlayer *player;
+@property (nonatomic, weak, nullable) __kindof SJBaseCommonCode *player;
 @end
 
 @implementation SJClipsControlLayer 
@@ -80,21 +80,21 @@ static SJControlLayerIdentifier SJClipsResultsControlLayerIdentifier = 3;
 }
 
 - (void)screenshotItemWasTapped {
-    [self _start:SJVideoPlayerClipsOperation_Screenshot];
+    [self _start:SJCommonCodeClipsOperation_Screenshot];
 }
 
 - (void)exportVideoItemWasTapped {
-    [self _start:SJVideoPlayerClipsOperation_Export];
+    [self _start:SJCommonCodeClipsOperation_Export];
 }
 
 - (void)exportGIFItemWasTapped {
-    [self _start:SJVideoPlayerClipsOperation_GIF];
+    [self _start:SJCommonCodeClipsOperation_GIF];
 }
 
-- (void)_start:(SJVideoPlayerClipsOperation)operation {
+- (void)_start:(SJCommonCodeClipsOperation)operation {
     if ( _player.assetStatus != SJAssetStatusReadyToPlay ) {
         [self.player.textPopupController show:[NSAttributedString sj_UIKitText:^(id<SJUIKitTextMakerProtocol>  _Nonnull make) {
-            make.append(SJVideoPlayerConfigurations.shared.localizedStrings.operationFailedPrompt);
+            make.append(SJCommonCodeConfigurations.shared.localizedStrings.operationFailedPrompt);
             make.textColor(UIColor.whiteColor);
         }]];
         return;
@@ -105,15 +105,15 @@ static SJControlLayerIdentifier SJClipsResultsControlLayerIdentifier = 3;
     }
 
     switch ( operation ) {
-        case SJVideoPlayerClipsOperation_Unknown:
+        case SJCommonCodeClipsOperation_Unknown:
             break;
-        case SJVideoPlayerClipsOperation_Screenshot:
-            [self _showResultsWithParameters:[self _parametersWithOperation:SJVideoPlayerClipsOperation_Screenshot range:kCMTimeRangeZero]];
+        case SJCommonCodeClipsOperation_Screenshot:
+            [self _showResultsWithParameters:[self _parametersWithOperation:SJCommonCodeClipsOperation_Screenshot range:kCMTimeRangeZero]];
             break;
-        case SJVideoPlayerClipsOperation_Export:
+        case SJCommonCodeClipsOperation_Export:
             [self.switcher switchControlLayerForIdentifier:SJClipsVideoRecordsControlLayerIdentifier];
             break;
-        case SJVideoPlayerClipsOperation_GIF:
+        case SJCommonCodeClipsOperation_GIF:
             [self.switcher switchControlLayerForIdentifier:SJClipsGIFRecordsControlLayerIdentifier];
             break;
     }
@@ -127,15 +127,15 @@ static SJControlLayerIdentifier SJClipsResultsControlLayerIdentifier = 3;
     }
 }
 
-- (SJVideoPlayerClipsParameters *)_parametersWithOperation:(SJVideoPlayerClipsOperation)operation range:(CMTimeRange)range {
-    SJVideoPlayerClipsParameters *parameters = [[SJVideoPlayerClipsParameters alloc] initWithOperation:operation range:range];
+- (SJCommonCodeClipsParameters *)_parametersWithOperation:(SJCommonCodeClipsOperation)operation range:(CMTimeRange)range {
+    SJCommonCodeClipsParameters *parameters = [[SJCommonCodeClipsParameters alloc] initWithOperation:operation range:range];
     parameters.resultUploader = self.config.resultUploader;
     parameters.resultNeedUpload = self.config.resultNeedUpload;
     parameters.saveResultToAlbum = self.config.saveResultToAlbum;
     return parameters;
 }
 
-- (void)_showResultsWithParameters:(id<SJVideoPlayerClipsParameters>)parameters {
+- (void)_showResultsWithParameters:(id<SJCommonCodeClipsParameters>)parameters {
     [_player pause];
     
     [self.switcher switchControlLayerForIdentifier:SJClipsResultsControlLayerIdentifier];
@@ -169,7 +169,7 @@ static SJControlLayerIdentifier SJClipsResultsControlLayerIdentifier = 3;
 }
 
 - (void)_updateRightItemSettings {
-    id<SJVideoPlayerControlLayerResources> sources = SJVideoPlayerConfigurations.shared.resources;
+    id<SJCommonCodeControlLayerResources> sources = SJCommonCodeConfigurations.shared.resources;
     SJEdgeControlButtonItem *screenshotItem = [self.rightAdapter itemForTag:SJClipsControlLayerRightItem_Screenshot];
     screenshotItem.image = sources.screenshotImage;
     screenshotItem.innerHidden = _config.disableScreenshot;
@@ -185,8 +185,8 @@ static SJControlLayerIdentifier SJClipsResultsControlLayerIdentifier = 3;
     [self.rightAdapter reload];
 }
 
-- (void)_initializeSwitcher:(__kindof SJBaseVideoPlayer *)videoPlayer {
-    _switcher = [[SJControlLayerSwitcher alloc] initWithPlayer:videoPlayer];
+- (void)_initializeSwitcher:(__kindof SJBaseCommonCode *)commonCode {
+    _switcher = [[SJControlLayerSwitcher alloc] initWithPlayer:commonCode];
     __weak typeof(self) _self = self;
     _switcher.resolveControlLayer = ^id<SJControlLayer> _Nullable(SJControlLayerIdentifier identifier) {
         __strong typeof(_self) self = _self;
@@ -206,7 +206,7 @@ static SJControlLayerIdentifier SJClipsResultsControlLayerIdentifier = 3;
                     }
                         break;
                     case SJClipsStatus_Finished: {
-                        [self _showResultsWithParameters:[self _parametersWithOperation:SJVideoPlayerClipsOperation_GIF range:control.range]];
+                        [self _showResultsWithParameters:[self _parametersWithOperation:SJCommonCodeClipsOperation_GIF range:control.range]];
                     }
                         break;
                 }
@@ -228,7 +228,7 @@ static SJControlLayerIdentifier SJClipsResultsControlLayerIdentifier = 3;
                     }
                         break;
                     case SJClipsStatus_Finished: {
-                        [self _showResultsWithParameters:[self _parametersWithOperation:SJVideoPlayerClipsOperation_Export range:control.range]];
+                        [self _showResultsWithParameters:[self _parametersWithOperation:SJCommonCodeClipsOperation_Export range:control.range]];
                     }
                         break;
                 }
@@ -249,14 +249,14 @@ static SJControlLayerIdentifier SJClipsResultsControlLayerIdentifier = 3;
     };
 }
 
-- (void)setConfig:(nullable SJVideoPlayerClipsConfig *)config {
+- (void)setConfig:(nullable SJCommonCodeClipsConfig *)config {
     _config = config;
     [self _updateRightItemSettings];
 }
 
 #pragma mark -
 
-- (BOOL)_shouldStart:(SJVideoPlayerClipsOperation)operation {
+- (BOOL)_shouldStart:(SJCommonCodeClipsOperation)operation {
     if ( _config.shouldStart != nil ) {
         return _config.shouldStart(self.player, operation);
     }
@@ -270,19 +270,19 @@ static SJControlLayerIdentifier SJClipsResultsControlLayerIdentifier = 3;
     return self;
 }
 
-- (void)installedControlViewToVideoPlayer:(__kindof SJBaseVideoPlayer *)videoPlayer {
-    _player = videoPlayer;
-    [videoPlayer needHiddenStatusBar];
-    [self _initializeSwitcher:videoPlayer];
+- (void)installedControlViewToCommonCode:(__kindof SJBaseCommonCode *)commonCode {
+    _player = commonCode;
+    [commonCode needHiddenStatusBar];
+    [self _initializeSwitcher:commonCode];
     sj_view_makeDisappear(self.rightContainerView, NO);
 }
 
-- (BOOL)canTriggerRotationOfVideoPlayer:(__kindof SJBaseVideoPlayer *)videoPlayer {
+- (BOOL)canTriggerRotationOfCommonCode:(__kindof SJBaseCommonCode *)commonCode {
     return NO;
 }
 
-- (BOOL)videoPlayer:(__kindof SJBaseVideoPlayer *)videoPlayer gestureRecognizerShouldTrigger:(SJPlayerGestureType)type location:(CGPoint)location {
-    if ( type == SJPlayerGestureType_SingleTap ) {
+- (BOOL)commonCode:(__kindof SJBaseCommonCode *)commonCode gestureRecognizerShouldTrigger:(SJBFCodeGestureType)type location:(CGPoint)location {
+    if ( type == SJBFCodeGestureType_SingleTap ) {
         if ( ![self.rightAdapter itemContainsPoint:location] ) {
             if ( _cancelledOperationExeBlock )
                 _cancelledOperationExeBlock(self);
@@ -290,7 +290,7 @@ static SJControlLayerIdentifier SJClipsResultsControlLayerIdentifier = 3;
     }
     return NO;
 }
-- (void)controlLayerNeedAppear:(__kindof SJBaseVideoPlayer *)videoPlayer { }
-- (void)controlLayerNeedDisappear:(__kindof SJBaseVideoPlayer *)videoPlayer { }
+- (void)controlLayerNeedAppear:(__kindof SJBaseCommonCode *)commonCode { }
+- (void)controlLayerNeedDisappear:(__kindof SJBaseCommonCode *)commonCode { }
 @end
 NS_ASSUME_NONNULL_END

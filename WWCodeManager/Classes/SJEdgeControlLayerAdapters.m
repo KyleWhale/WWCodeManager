@@ -1,9 +1,9 @@
 //
 //  SJEdgeControlLayerAdapters.m
-//  SJVideoPlayer
+//  SJCommonCode
 //
-//  Created by 畅三江 on 2018/10/24.
-//  Copyright © 2018 畅三江. All rights reserved.
+//  Created by admin on 2018/10/24.
+//  Copyright © 2018 admin. All rights reserved.
 //
 
 #if __has_include(<Masonry/Masonry.h>)
@@ -17,7 +17,7 @@
 #import "SJAttributesFactory.h"
 #endif
 
-#import "SJVideoPlayerControlMaskView.h"
+#import "SJCommonCodeControlMaskView.h"
 #import "SJEdgeControlLayerAdapters.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -254,9 +254,9 @@ _isIPhoneXSeries(void) {
     }];
 }
 
-- (SJVideoPlayerControlMaskView *)topContainerView {
+- (SJCommonCodeControlMaskView *)topContainerView {
     if ( _topContainerView ) return _topContainerView;
-    _topContainerView = [[SJVideoPlayerControlMaskView alloc] initWithStyle:SJMaskStyle_top];
+    _topContainerView = [[SJCommonCodeControlMaskView alloc] initWithStyle:SJMaskStyle_top];
     [self addSubview:_topContainerView];
     [_topContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.offset(0);
@@ -294,9 +294,9 @@ _isIPhoneXSeries(void) {
     return _leftContainerView;
 }
 
-- (SJVideoPlayerControlMaskView *)bottomContainerView {
+- (SJCommonCodeControlMaskView *)bottomContainerView {
     if ( _bottomContainerView ) return _bottomContainerView;
-    _bottomContainerView = [[SJVideoPlayerControlMaskView alloc] initWithStyle:SJMaskStyle_bottom];
+    _bottomContainerView = [[SJCommonCodeControlMaskView alloc] initWithStyle:SJMaskStyle_bottom];
     [self addSubview:_bottomContainerView];
     [_bottomContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(0);

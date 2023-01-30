@@ -2,11 +2,11 @@
 //  UIScrollView+ListViewAutoplaySJAdd.h
 //  Masonry
 //
-//  Created by 畅三江 on 2018/7/9.
+//  Created by admin on 2018/7/9.
 //
 
 #import <UIKit/UIKit.h>
-#import "SJPlayerAutoplayConfig.h"
+#import "SJBFCodeAutoplayConfig.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// enable autoplay
 /// 开启
 ///
-- (void)sj_enableAutoplayWithConfig:(SJPlayerAutoplayConfig *)autoplayConfig;
+- (void)sj_enableAutoplayWithConfig:(SJBFCodeAutoplayConfig *)autoplayConfig;
 
 ///
 /// 关闭
@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
-/// Developers don't need to care, this category is automatically maintained by the SJBaseVideoPlayer.
+/// Developers don't need to care, this category is automatically maintained by the SJBaseCommonCode.
 /// 开发者无需关心, 此分类由播放器自动维护
 @interface UIScrollView (SJAutoplayPlayerAssigns)
 @property (nonatomic, strong, nullable, readonly) NSIndexPath *sj_currentPlayingIndexPath;

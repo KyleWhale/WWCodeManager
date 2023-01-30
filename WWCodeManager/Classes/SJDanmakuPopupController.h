@@ -2,7 +2,7 @@
 //  SJDanmakuPopupController.h
 //  Pods
 //
-//  Created by 畅三江 on 2019/11/12.
+//  Created by admin on 2019/11/12.
 //
 
 #import "SJDanmakuPopupControllerDefines.h"

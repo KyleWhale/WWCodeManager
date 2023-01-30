@@ -1,13 +1,13 @@
 //
 //  SJClipsSaveResultToAlbumHandler.h
-//  SJVideoPlayer
+//  SJCommonCode
 //
-//  Created by 畅三江 on 2019/1/20.
-//  Copyright © 2019 畅三江. All rights reserved.
+//  Created by admin on 2019/1/20.
+//  Copyright © 2019 admin. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-@protocol SJVideoPlayerClipsResult;
+@protocol SJCommonCodeClipsResult;
 
 NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSUInteger, SJClipsSaveResultToAlbumFailedReason) {
@@ -20,7 +20,7 @@ typedef NS_ENUM(NSUInteger, SJClipsSaveResultToAlbumFailedReason) {
 @end
 
 @protocol SJClipsSaveResultToAlbumHandler <NSObject>
-- (void)saveResult:(id<SJVideoPlayerClipsResult>)result completionHandler:(void(^)(BOOL r, id<SJClipsSaveResultFailed> failed))completionHandler;
+- (void)saveResult:(id<SJCommonCodeClipsResult>)result completionHandler:(void(^)(BOOL r, id<SJClipsSaveResultFailed> failed))completionHandler;
 @end
 
 @interface SJClipsSaveResultToAlbumHandler : NSObject<SJClipsSaveResultToAlbumHandler>

@@ -1,6 +1,6 @@
 //
 //  SJPlaybackRecord.h
-//  SJBaseVideoPlayer
+//  SJBaseCommonCode
 //
 //  Created by BlueDancer on 2020/5/25.
 //
@@ -10,11 +10,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SJPlaybackRecord : NSObject<SJPlaybackRecord>
-- (instancetype)initWithMediaId:(NSInteger)mediaId mediaType:(SJMediaType)mediaType userId:(NSInteger)userId;
+- (instancetype)initWithMediaId:(NSInteger)mediaId mediaType:(SJMTType)mediaType userId:(NSInteger)userId;
 @property (nonatomic) NSInteger mediaId;
 @property (nonatomic) NSInteger userId;
 @property (nonatomic) NSTimeInterval position;
-@property (nonatomic) SJMediaType mediaType;
+@property (nonatomic) SJMTType mediaType;
 @end
 
 

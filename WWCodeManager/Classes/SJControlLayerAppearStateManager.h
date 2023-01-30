@@ -1,8 +1,8 @@
 //
 //  SJControlLayerAppearStateManager.h
-//  SJBaseVideoPlayer
+//  SJBaseCommonCode
 //
-//  Created by 畅三江 on 2018/12/28.
+//  Created by admin on 2018/12/28.
 //
 
 #import <Foundation/Foundation.h>

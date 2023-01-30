@@ -1,15 +1,15 @@
 //
 //  SJMoreSettingControlLayer.m
-//  SJVideoPlayer_Example
+//  SJCommonCode_Example
 //
-//  Created by 畅三江 on 2019/7/19.
+//  Created by admin on 2019/7/19.
 //  Copyright © 2019 changsanjiang. All rights reserved.
 //
 
 #import "SJMoreSettingControlLayer.h"
 #import "UIView+SJAnimationAdded.h"
 #import "SJButtonProgressSlider.h"
-#import "SJVideoPlayerConfigurations.h"
+#import "SJCommonCodeConfigurations.h"
 
 #if __has_include(<SJUIKit/SJAttributesFactory.h>)
 #import <SJUIKit/SJAttributesFactory.h>
@@ -17,10 +17,10 @@
 #import "SJAttributesFactory.h"
 #endif
 
-#if __has_include(<SJBaseVideoPlayer/SJBaseVideoPlayer.h>)
-#import <SJBaseVideoPlayer/SJBaseVideoPlayer.h>
+#if __has_include(<SJBaseCommonCode/SJBaseCommonCode.h>)
+#import <SJBaseCommonCode/SJBaseCommonCode.h>
 #else
-#import "SJBaseVideoPlayer.h"
+#import "SJBaseCommonCode.h"
 #endif
 
 NS_ASSUME_NONNULL_BEGIN
@@ -29,7 +29,7 @@ SJEdgeControlButtonItemTag const SJMoreSettingControlLayerItem_Brightness = 1000
 SJEdgeControlButtonItemTag const SJMoreSettingControlLayerItem_Rate = 10002;
 
 @interface SJMoreSettingControlLayer ()<SJProgressSliderDelegate>
-@property (nonatomic, weak, nullable) SJBaseVideoPlayer *videoPlayer;
+@property (nonatomic, weak, nullable) SJBaseCommonCode *commonCode;
 @end
 
 @implementation SJMoreSettingControlLayer
@@ -46,8 +46,8 @@ SJEdgeControlButtonItemTag const SJMoreSettingControlLayerItem_Rate = 10002;
     return self;
 }
 
-- (void)installedControlViewToVideoPlayer:(__kindof SJBaseVideoPlayer *)videoPlayer {
-    _videoPlayer = videoPlayer;
+- (void)installedControlViewToCommonCode:(__kindof SJBaseCommonCode *)commonCode {
+    _commonCode = commonCode;
     
     sj_view_initializes(self.rightContainerView);
     
@@ -68,48 +68,48 @@ SJEdgeControlButtonItemTag const SJMoreSettingControlLayerItem_Rate = 10002;
 - (void)restartControlLayer {
     _restarted = YES;
     
-    if ( self.videoPlayer.isFullscreen )
-        [self.videoPlayer needHiddenStatusBar];
+    if ( self.commonCode.isFullscreen )
+        [self.commonCode needHiddenStatusBar];
     [self _refreshValueForSliderItems];
     sj_view_makeAppear(self.controlView, YES);
     sj_view_makeAppear(self.rightContainerView, YES);
 }
 
-- (void)controlLayerNeedAppear:(__kindof SJBaseVideoPlayer *)videoPlayer { }
+- (void)controlLayerNeedAppear:(__kindof SJBaseCommonCode *)commonCode { }
 
-- (void)controlLayerNeedDisappear:(__kindof SJBaseVideoPlayer *)videoPlayer { }
+- (void)controlLayerNeedDisappear:(__kindof SJBaseCommonCode *)commonCode { }
 
-- (BOOL)videoPlayer:(__kindof SJBaseVideoPlayer *)videoPlayer gestureRecognizerShouldTrigger:(SJPlayerGestureType)type location:(CGPoint)location {
-    if ( type == SJPlayerGestureType_SingleTap ) {
+- (BOOL)commonCode:(__kindof SJBaseCommonCode *)commonCode gestureRecognizerShouldTrigger:(SJBFCodeGestureType)type location:(CGPoint)location {
+    if ( type == SJBFCodeGestureType_SingleTap ) {
         if ( !CGRectContainsPoint(self.rightContainerView.frame, location) ) {
             if ( [self.delegate respondsToSelector:@selector(tappedBlankAreaOnTheControlLayer:)] ) {
                 [self.delegate tappedBlankAreaOnTheControlLayer:self];
             }
         }
     }
-    else if ( type == SJPlayerGestureType_Pan && !CGRectContainsPoint(self.rightContainerView.frame, location) ) {
-        return videoPlayer.gestureController.movingDirection == SJPanGestureMovingDirection_V;
+    else if ( type == SJBFCodeGestureType_Pan && !CGRectContainsPoint(self.rightContainerView.frame, location) ) {
+        return commonCode.gestureController.movingDirection == SJPanGestureMovingDirection_V;
     }
-    else if ( type == SJPlayerGestureType_DoubleTap )
+    else if ( type == SJBFCodeGestureType_DoubleTap )
         return YES;
     
     return NO;
 }
 
-- (BOOL)canTriggerRotationOfVideoPlayer:(__kindof SJBaseVideoPlayer *)videoPlayer {
+- (BOOL)canTriggerRotationOfCommonCode:(__kindof SJBaseCommonCode *)commonCode {
     return NO;
 }
 
-- (void)videoPlayer:(__kindof SJBaseVideoPlayer *)videoPlayer volumeChanged:(float)volume {
+- (void)commonCode:(__kindof SJBaseCommonCode *)commonCode volumeChanged:(float)volume {
     [self _setSliderValueForItemTag:SJMoreSettingControlLayerItem_Volume value:volume];
 }
 
-- (void)videoPlayer:(__kindof SJBaseVideoPlayer *)videoPlayer brightnessChanged:(float)brightness {
+- (void)commonCode:(__kindof SJBaseCommonCode *)commonCode brightnessChanged:(float)brightness {
     [self _setSliderValueForItemTag:SJMoreSettingControlLayerItem_Brightness value:brightness];
 }
 
-- (void)videoPlayer:(__kindof SJBaseVideoPlayer *)videoPlayer rateChanged:(float)rate {
-    [videoPlayer.textPopupController show:[NSAttributedString sj_UIKitText:^(id<SJUIKitTextMakerProtocol>  _Nonnull make) {
+- (void)commonCode:(__kindof SJBaseCommonCode *)commonCode rateChanged:(float)rate {
+    [commonCode.textPopupController show:[NSAttributedString sj_UIKitText:^(id<SJUIKitTextMakerProtocol>  _Nonnull make) {
         make.append([NSString stringWithFormat:@"%.0f %%", rate * 100]);
         make.textColor(UIColor.whiteColor);
     }]];
@@ -123,13 +123,13 @@ SJEdgeControlButtonItemTag const SJMoreSettingControlLayerItem_Rate = 10002;
 - (void)slider:(SJProgressSlider *)slider valueDidChange:(CGFloat)value {
     if ( slider.isDragging ) {
         if ( slider.tag == SJMoreSettingControlLayerItem_Volume ) {
-            _videoPlayer.deviceVolumeAndBrightnessController.volume = slider.value;
+            _commonCode.deviceVolumeAndBrightnessController.volume = slider.value;
         }
         else if ( slider.tag == SJMoreSettingControlLayerItem_Brightness ) {
-            _videoPlayer.deviceVolumeAndBrightnessController.brightness = slider.value;
+            _commonCode.deviceVolumeAndBrightnessController.brightness = slider.value;
         }
         else {
-            _videoPlayer.rate = slider.value;
+            _commonCode.rate = slider.value;
         }
     }
 }
@@ -169,8 +169,8 @@ SJEdgeControlButtonItemTag const SJMoreSettingControlLayerItem_Rate = 10002;
         SJButtonProgressSlider *progressView = SJButtonProgressSlider.new;
         progressView.slider.delegate = self;
         progressView.slider.tag = rateItem.tag;
-        progressView.slider.maxValue = SJVideoPlayerConfigurations.shared.resources.moreSliderMaxRateValue;
-        progressView.slider.minValue = SJVideoPlayerConfigurations.shared.resources.moreSliderMinRateValue;
+        progressView.slider.maxValue = SJCommonCodeConfigurations.shared.resources.moreSliderMaxRateValue;
+        progressView.slider.minValue = SJCommonCodeConfigurations.shared.resources.moreSliderMinRateValue;
         rateItem.customView = progressView;
         [self.rightAdapter addItem:rateItem];
     }
@@ -180,9 +180,9 @@ SJEdgeControlButtonItemTag const SJMoreSettingControlLayerItem_Rate = 10002;
 }
 
 - (void)_refreshValueForSliderItems {
-    [self _setSliderValueForItemTag:SJMoreSettingControlLayerItem_Volume value:_videoPlayer.deviceVolumeAndBrightnessController.volume];
-    [self _setSliderValueForItemTag:SJMoreSettingControlLayerItem_Brightness value:_videoPlayer.deviceVolumeAndBrightnessController.brightness];
-    [self _setSliderValueForItemTag:SJMoreSettingControlLayerItem_Rate value:_videoPlayer.rate];
+    [self _setSliderValueForItemTag:SJMoreSettingControlLayerItem_Volume value:_commonCode.deviceVolumeAndBrightnessController.volume];
+    [self _setSliderValueForItemTag:SJMoreSettingControlLayerItem_Brightness value:_commonCode.deviceVolumeAndBrightnessController.brightness];
+    [self _setSliderValueForItemTag:SJMoreSettingControlLayerItem_Rate value:_commonCode.rate];
 }
 
 - (void)_setSliderValueForItemTag:(SJEdgeControlButtonItemTag)itemTag value:(float)value {
@@ -193,7 +193,7 @@ SJEdgeControlButtonItemTag const SJMoreSettingControlLayerItem_Rate = 10002;
 }
 
 - (void)_refreshSettings {
-    id<SJVideoPlayerControlLayerResources> sources = SJVideoPlayerConfigurations.shared.resources;
+    id<SJCommonCodeControlLayerResources> sources = SJCommonCodeConfigurations.shared.resources;
     self.rightContainerView.backgroundColor = sources.moreControlLayerBackgroundColor;
     
     __auto_type _configProgressView = ^(SJButtonProgressSlider *progressView, UIImage *left, UIImage *right) {

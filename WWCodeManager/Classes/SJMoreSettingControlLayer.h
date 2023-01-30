@@ -1,8 +1,8 @@
 //
 //  SJMoreSettingControlLayer.h
-//  SJVideoPlayer_Example
+//  SJCommonCode_Example
 //
-//  Created by 畅三江 on 2019/7/19.
+//  Created by admin on 2019/7/19.
 //  Copyright © 2019 changsanjiang. All rights reserved.
 //
 

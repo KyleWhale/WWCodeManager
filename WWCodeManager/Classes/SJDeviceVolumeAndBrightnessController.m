@@ -2,18 +2,18 @@
 //  SJDeviceVolumeAndBrightnessController.m
 //  SJDeviceVolumeAndBrightnessController
 //
-//  Created by 畅三江 on 2017/12/10.
+//  Created by admin on 2017/12/10.
 //  Copyright © 2017年 changsanjiang. All rights reserved.
 //
 
 #import "SJDeviceVolumeAndBrightnessController.h"
-#import "SJBaseVideoPlayerResourceLoader.h"
-#import "SJBaseVideoPlayerConst.h"
-#import "SJPlayerView.h"
+#import "SJBaseCommonCodeResourceLoader.h"
+#import "SJBaseCommonCodeConst.h"
+#import "SJBFCodeView.h"
 #import "SJDeviceVolumeAndBrightness.h"
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MPVolumeView.h>
-#import "UIView+SJBaseVideoPlayerExtended.h"
+#import "UIView+SJBaseCommonCodeExtended.h"
 
 #if __has_include(<Masonry/Masonry.h>)
 #import <Masonry/Masonry.h>
@@ -214,8 +214,8 @@ static NSNotificationName const SJDeviceBrightnessDidChangeNotification = @"SJDe
         _volumeView = [SJDeviceVolumeAndBrightnessPopupView new];
         SJDeviceVolumeAndBrightnessPopupItem *model = [SJDeviceVolumeAndBrightnessPopupItem new];
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            UIImage *muteImage = [SJBaseVideoPlayerResourceLoader imageNamed:@"mute"];
-            UIImage *volumeImage = [SJBaseVideoPlayerResourceLoader imageNamed:@"volume"];
+            UIImage *muteImage = [SJBaseCommonCodeResourceLoader imageNamed:@"mute"];
+            UIImage *volumeImage = [SJBaseCommonCodeResourceLoader imageNamed:@"volume"];
             dispatch_async(dispatch_get_main_queue(), ^{
                 model.startImage = muteImage;
                 model.image = volumeImage;
@@ -279,7 +279,7 @@ static NSNotificationName const SJDeviceBrightnessDidChangeNotification = @"SJDe
         
         SJDeviceVolumeAndBrightnessPopupItem *model = [SJDeviceVolumeAndBrightnessPopupItem new];
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            UIImage *image = [SJBaseVideoPlayerResourceLoader imageNamed:@"brightness"];
+            UIImage *image = [SJBaseCommonCodeResourceLoader imageNamed:@"brightness"];
             dispatch_async(dispatch_get_main_queue(), ^{
                 model.startImage = image;
                 model.image = image;

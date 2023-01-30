@@ -1,13 +1,13 @@
 //
 //  SJPlayModelPropertiesObserver.m
-//  SJVideoPlayerAssetCarrier
+//  SJCommonCodeAssetCarrier
 //
-//  Created by 畅三江 on 2018/6/29.
+//  Created by admin on 2018/6/29.
 //  Copyright © 2018年 changsanjiang. All rights reserved.
 //
 
 #import "SJPlayModelPropertiesObserver.h"
-#import "UIView+SJBaseVideoPlayerExtended.h"
+#import "UIView+SJBaseCommonCodeExtended.h"
 #import "SJPlayModel+SJPrivate.h"
 #import <objc/message.h>
 
@@ -167,7 +167,7 @@ static NSString *kState = @"state";
     // 以下已弃用, 未来可能会删除
     ///
     /// Thanks @loveuqian
-    /// https://github.com/changsanjiang/SJVideoPlayer/issues/62
+    /// https://github.com/changsanjiang/SJCommonCode/issues/62
     ///
     else if ( [_playModel isKindOfClass:[SJUICollectionViewNestedInUITableViewCellPlayModel class]] ) {
         SJUICollectionViewNestedInUITableViewCellPlayModel *playModel = _playModel;

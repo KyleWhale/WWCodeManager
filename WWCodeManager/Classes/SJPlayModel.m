@@ -1,14 +1,14 @@
 //
 //  SJPlayModel.m
-//  SJVideoPlayerAssetCarrier
+//  SJCommonCodeAssetCarrier
 //
-//  Created by 畅三江 on 2018/6/28.
+//  Created by admin on 2018/6/28.
 //  Copyright © 2018年 changsanjiang. All rights reserved.
 //
 
 #import "SJPlayModel.h"
-#import "UIView+SJBaseVideoPlayerExtended.h"
-#import "UIScrollView+SJBaseVideoPlayerExtended.h"
+#import "UIView+SJBaseCommonCodeExtended.h"
+#import "UIScrollView+SJBaseCommonCodeExtended.h"
 #import "SJPlayModel+SJPrivate.h"
 
 #pragma clang diagnostic push

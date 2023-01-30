@@ -1,6 +1,6 @@
 //
 //  SJDeviceVolumeAndBrightnessTargetViewContext.h
-//  SJBaseVideoPlayer
+//  SJBaseCommonCode
 //
 //  Created by 蓝舞者 on 2022/11/2.
 //

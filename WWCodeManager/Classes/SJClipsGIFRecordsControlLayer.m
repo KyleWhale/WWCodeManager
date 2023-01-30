@@ -1,9 +1,9 @@
 //
 //  SJClipsGIFRecordsControlLayer.m
-//  SJVideoPlayer
+//  SJCommonCode
 //
-//  Created by 畅三江 on 2019/1/20.
-//  Copyright © 2019 畅三江. All rights reserved.
+//  Created by admin on 2019/1/20.
+//  Copyright © 2019 admin. All rights reserved.
 //
 
 #import "SJClipsGIFRecordsControlLayer.h"
@@ -11,7 +11,7 @@
 #import "SJClipsBackButton.h"
 #import "SJClipsButtonContainerView.h"
 #import "SJClipsGIFCountDownView.h"
-#import "SJVideoPlayerConfigurations.h"
+#import "SJCommonCodeConfigurations.h"
 
 #if __has_include(<Masonry/Masonry.h>)
 #import <Masonry/Masonry.h>
@@ -19,12 +19,12 @@
 #import "Masonry.h"
 #endif
 
-#if __has_include(<SJBaseVideoPlayer/NSTimer+SJAssetAdd.h>)
-#import <SJBaseVideoPlayer/NSTimer+SJAssetAdd.h>
-#import <SJBaseVideoPlayer/SJBaseVideoPlayer.h>
+#if __has_include(<SJBaseCommonCode/NSTimer+SJAssetAdd.h>)
+#import <SJBaseCommonCode/NSTimer+SJAssetAdd.h>
+#import <SJBaseCommonCode/SJBaseCommonCode.h>
 #else
 #import "NSTimer+SJAssetAdd.h"
-#import "SJBaseVideoPlayer.h"
+#import "SJBaseCommonCode.h"
 #endif
 
 
@@ -36,7 +36,7 @@ static SJEdgeControlButtonItemTag SJBottomItem_LeftFill = 4;
 static SJEdgeControlButtonItemTag SJBottomItem_RightFill = 5;
 
 @interface SJClipsGIFRecordsControlLayer ()
-@property (nonatomic, weak, nullable) __kindof SJBaseVideoPlayer *player;
+@property (nonatomic, weak, nullable) __kindof SJBaseCommonCode *player;
 @property (nonatomic, strong, readonly) SJClipsButtonContainerView *backButtonContainerView;
 @property (nonatomic, strong, readonly) SJClipsGIFCountDownView *countDownView;
 @property (nonatomic, strong, nullable) NSTimer *countDownTimer;
@@ -242,14 +242,14 @@ static SJEdgeControlButtonItemTag SJBottomItem_RightFill = 5;
 }
 
 - (void)_updateTopItemSettings {
-    id<SJVideoPlayerLocalizedStrings> strings = SJVideoPlayerConfigurations.shared.localizedStrings;
+    id<SJCommonCodeLocalizedStrings> strings = SJCommonCodeConfigurations.shared.localizedStrings;
     SJClipsBackButton *backButton = _backButtonContainerView.button;
     [backButton setTitle:strings.cancel forState:UIControlStateNormal];
     [self.topAdapter reload];
 }
 
 - (void)_updateRightItemSettings {
-    id<SJVideoPlayerControlLayerResources> resources = SJVideoPlayerConfigurations.shared.resources;
+    id<SJCommonCodeControlLayerResources> resources = SJCommonCodeConfigurations.shared.resources;
     SJEdgeControlButtonItem *doneItem = [self.rightAdapter itemForTag:SJRightItem_Done];
     UIImage *image = CMTimeGetSeconds(self.duration) < 2 ? resources.recordsPreparingImage : resources.recordsToFinishRecordingImage;
     if ( image != doneItem.image ) {
@@ -259,7 +259,7 @@ static SJEdgeControlButtonItemTag SJBottomItem_RightFill = 5;
 }
 
 - (void)_updateBottomItemSettings {
-    id<SJVideoPlayerLocalizedStrings> strings = SJVideoPlayerConfigurations.shared.localizedStrings;
+    id<SJCommonCodeLocalizedStrings> strings = SJCommonCodeConfigurations.shared.localizedStrings;
     _countDownView.timeLabel.text = [NSString stringWithFormat:@"%lds", (long)_countDownNum];
     _countDownView.promptLabel.text = CMTimeGetSeconds(self.duration) < 2 ? strings.recordsPreparingPrompt : strings.recordsToFinishRecordingPrompt;
     [self.bottomAdapter reload];
@@ -270,30 +270,30 @@ static SJEdgeControlButtonItemTag SJBottomItem_RightFill = 5;
     return self;
 }
 
-- (void)installedControlViewToVideoPlayer:(__kindof SJBaseVideoPlayer *)videoPlayer {
-    _player = videoPlayer;
-    [videoPlayer needHiddenStatusBar];
+- (void)installedControlViewToCommonCode:(__kindof SJBaseCommonCode *)commonCode {
+    _player = commonCode;
+    [commonCode needHiddenStatusBar];
     sj_view_makeDisappear(self.topContainerView, NO);
     sj_view_makeDisappear(self.rightContainerView, NO);
     sj_view_makeDisappear(self.bottomContainerView, NO);
 }
 
-- (BOOL)videoPlayer:(__kindof SJBaseVideoPlayer *)videoPlayer gestureRecognizerShouldTrigger:(SJPlayerGestureType)type location:(CGPoint)location {
+- (BOOL)commonCode:(__kindof SJBaseCommonCode *)commonCode gestureRecognizerShouldTrigger:(SJBFCodeGestureType)type location:(CGPoint)location {
     return NO;
 }
 
-- (BOOL)canTriggerRotationOfVideoPlayer:(__kindof SJBaseVideoPlayer *)videoPlayer {
+- (BOOL)canTriggerRotationOfCommonCode:(__kindof SJBaseCommonCode *)commonCode {
     return NO;
 }
 
-- (void)videoPlayerPlaybackStatusDidChange:(__kindof SJBaseVideoPlayer *)videoPlayer {
-    if ( videoPlayer.isPlaybackFinished ) {
+- (void)commonCodePlaybackStatusDidChange:(__kindof SJBaseCommonCode *)commonCode {
+    if ( commonCode.isPlaybackFinished ) {
         [self finished];
     }
-    else if ( videoPlayer.assetStatus == SJAssetStatusFailed ) {
+    else if ( commonCode.assetStatus == SJAssetStatusFailed ) {
         [self cancel];
     }
-    else if ( videoPlayer.timeControlStatus == SJPlaybackTimeControlStatusPaused ) {
+    else if ( commonCode.timeControlStatus == SJPlaybackTimeControlStatusPaused ) {
         [self pause];
     }
     else if ( self.status != SJClipsStatus_Recording ) {
@@ -301,12 +301,12 @@ static SJEdgeControlButtonItemTag SJBottomItem_RightFill = 5;
     }
 }
 
-- (void)controlLayerNeedAppear:(__kindof SJBaseVideoPlayer *)videoPlayer { /* nothing */ }
-- (void)controlLayerNeedDisappear:(__kindof SJBaseVideoPlayer *)videoPlayer { /* nothing */ }
+- (void)controlLayerNeedAppear:(__kindof SJBaseCommonCode *)commonCode { /* nothing */ }
+- (void)controlLayerNeedDisappear:(__kindof SJBaseCommonCode *)commonCode { /* nothing */ }
 
-- (void)applicationDidBecomeActiveWithVideoPlayer:(__kindof SJBaseVideoPlayer *)videoPlayer {
+- (void)applicationDidBecomeActiveWithCommonCode:(__kindof SJBaseCommonCode *)commonCode {
     if ( self.status == SJClipsStatus_Paused ) {
-        [videoPlayer play];
+        [commonCode play];
     }
 }
 #pragma mark -

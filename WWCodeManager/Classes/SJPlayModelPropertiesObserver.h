@@ -1,8 +1,8 @@
 //
 //  SJPlayModelPropertiesObserver.h
-//  SJVideoPlayerAssetCarrier
+//  SJCommonCodeAssetCarrier
 //
-//  Created by 畅三江 on 2018/6/29.
+//  Created by admin on 2018/6/29.
 //  Copyright © 2018年 changsanjiang. All rights reserved.
 //
 

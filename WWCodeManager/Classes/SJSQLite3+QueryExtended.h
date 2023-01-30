@@ -2,7 +2,7 @@
 //  SJSQLite3+QueryExtended.h
 //  Pods-SJSQLite3_Example
 //
-//  Created by 畅三江 on 2019/7/30.
+//  Created by admin on 2019/7/30.
 //
 //  这里将会是对 SJSQLite3 的扩展.
 //

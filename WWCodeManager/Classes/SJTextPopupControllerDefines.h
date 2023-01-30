@@ -2,7 +2,7 @@
 //  SJTextPopupControllerDefines.h
 //  Pods
 //
-//  Created by 畅三江 on 2019/9/15.
+//  Created by admin on 2019/9/15.
 //
 
 #ifndef SJTextPopupControllerDefines_h

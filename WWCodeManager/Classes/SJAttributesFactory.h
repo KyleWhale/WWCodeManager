@@ -2,8 +2,8 @@
 //  SJAttributesFactory.h
 //  SJAttributesFactory
 //
-//  Created by 畅三江 on 2018/12/10.
-//  Copyright © 2018 畅三江. All rights reserved.
+//  Created by admin on 2018/12/10.
+//  Copyright © 2018 admin. All rights reserved.
 //
 
 #ifndef SJAttributesFactory_h

@@ -2,11 +2,11 @@
 //  SJDraggingProgressPopupView.m
 //  Pods
 //
-//  Created by 畅三江 on 2019/11/27.
+//  Created by admin on 2019/11/27.
 //
 
 #import "SJDraggingProgressPopupView.h"
-#import "SJVideoPlayerConfigurations.h"
+#import "SJCommonCodeConfigurations.h"
 #import "SJProgressSlider.h"
 #if __has_include(<Masonry/Masonry.h>)
 #import <Masonry/Masonry.h>
@@ -14,10 +14,10 @@
 #import "Masonry.h"
 #endif
 
-#if __has_include(<SJBaseVideoPlayer/NSString+SJBaseVideoPlayerExtended.h>)
-#import <SJBaseVideoPlayer/NSString+SJBaseVideoPlayerExtended.h>
+#if __has_include(<SJBaseCommonCode/NSString+SJBaseCommonCodeExtended.h>)
+#import <SJBaseCommonCode/NSString+SJBaseCommonCodeExtended.h>
 #else
-#import "NSString+SJBaseVideoPlayerExtended.h"
+#import "NSString+SJBaseCommonCodeExtended.h"
 #endif
 
 NS_ASSUME_NONNULL_BEGIN
@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
     if ( self ) {
         [self _setupViews];
         [self _updateSettings];
-        [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_updateSettings) name:SJVideoPlayerConfigurationsDidUpdateNotification object:nil];
+        [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_updateSettings) name:SJCommonCodeConfigurationsDidUpdateNotification object:nil];
     }
     return self;
 }
@@ -63,7 +63,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)setDragTime:(NSTimeInterval)dragTime {
-    id<SJVideoPlayerControlLayerResources> sources = SJVideoPlayerConfigurations.shared.resources;
+    id<SJCommonCodeControlLayerResources> sources = SJCommonCodeConfigurations.shared.resources;
     if ( dragTime > _dragTime ) {
         _directionImageView.image = sources.fastImage;
     }
@@ -277,7 +277,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)_updateSettings {
-    id<SJVideoPlayerControlLayerResources> resources = SJVideoPlayerConfigurations.shared.resources;
+    id<SJCommonCodeControlLayerResources> resources = SJCommonCodeConfigurations.shared.resources;
     _dragTimeLabel.textColor = resources.progressTraceColor;
     _progressSlider.traceImageView.backgroundColor = resources.progressTraceColor;
     _progressSlider.trackImageView.backgroundColor = resources.progressTrackColor;

@@ -2,13 +2,13 @@
 //  UIScrollView+ListViewAutoplaySJAdd.m
 //  Masonry
 //
-//  Created by 畅三江 on 2018/7/9.
+//  Created by admin on 2018/7/9.
 //
 
 #import "UIScrollView+ListViewAutoplaySJAdd.h"
-#import "UIScrollView+SJBaseVideoPlayerExtended.h"
-#import "UIView+SJBaseVideoPlayerExtended.h"
-#import "SJBaseVideoPlayerConst.h"
+#import "UIScrollView+SJBaseCommonCodeExtended.h"
+#import "UIView+SJBaseCommonCodeExtended.h"
+#import "SJBaseCommonCodeConst.h"
 #import "SJPlayModel.h"
 #import <objc/message.h>
 
@@ -25,20 +25,20 @@
 #endif
 
 @interface UIScrollView (SJAutoplayInternal)
-@property (nonatomic, strong, nullable) SJPlayerAutoplayConfig *sj_autoplayConfig;
+@property (nonatomic, strong, nullable) SJBFCodeAutoplayConfig *sj_autoplayConfig;
 @property (nonatomic, readonly) BOOL sj_isScrolledToTop;
 @property (nonatomic, readonly) BOOL sj_isScrolledToLeft;
 @property (nonatomic, readonly) BOOL sj_isScrolledToBottom;
 @property (nonatomic, readonly) BOOL sj_isScrolledToRight;
-- (BOOL)sj_isAutoplayTargetViewAppearedForConfiguration:(SJPlayerAutoplayConfig *)config atIndexPath:(NSIndexPath *)indexPath;
-- (nullable UIView *)sj_autoplayTargetViewForConfiguration:(SJPlayerAutoplayConfig *)config atIndexPath:(NSIndexPath *)indexPath;
-- (CGFloat)sj_autoplayGuidelineForConfiguration:(SJPlayerAutoplayConfig *)config;
-- (UIEdgeInsets)sj_autoplayPlayableAreaInsetsForConfiguration:(SJPlayerAutoplayConfig *)config;
+- (BOOL)sj_isAutoplayTargetViewAppearedForConfiguration:(SJBFCodeAutoplayConfig *)config atIndexPath:(NSIndexPath *)indexPath;
+- (nullable UIView *)sj_autoplayTargetViewForConfiguration:(SJBFCodeAutoplayConfig *)config atIndexPath:(NSIndexPath *)indexPath;
+- (CGFloat)sj_autoplayGuidelineForConfiguration:(SJBFCodeAutoplayConfig *)config;
+- (UIEdgeInsets)sj_autoplayPlayableAreaInsetsForConfiguration:(SJBFCodeAutoplayConfig *)config;
 - (NSArray<NSIndexPath *> *_Nullable)sj_sortedVisibleIndexPaths;
 @end
 
 
-static NSString *const kQueue = @"SJBaseVideoPlayerAutoplayTaskQueue";
+static NSString *const kQueue = @"SJBaseCommonCodeAutoplayTaskQueue";
 static SJRunLoopTaskQueue *
 sj_queue(void) {
     static SJRunLoopTaskQueue *queue = nil;
@@ -61,7 +61,7 @@ static void sj_removeContentOffsetObserver(UIScrollView *scrollView);
     return [objc_getAssociatedObject(self, _cmd) boolValue];
 }
 
-- (void)sj_enableAutoplayWithConfig:(SJPlayerAutoplayConfig *)autoplayConfig {
+- (void)sj_enableAutoplayWithConfig:(SJBFCodeAutoplayConfig *)autoplayConfig {
     self.sj_enabledAutoplay = YES;
     self.sj_autoplayConfig = autoplayConfig;
 
@@ -78,7 +78,7 @@ static void sj_removeContentOffsetObserver(UIScrollView *scrollView);
         ///
         /// Thanks @YangYus
         ///
-        /// Fix [#180](https://github.com/changsanjiang/SJVideoPlayer/issues/180)
+        /// Fix [#180](https://github.com/changsanjiang/SJCommonCode/issues/180)
         ///
         if ( self.window == nil ) {
             return;
@@ -100,7 +100,7 @@ static void sj_removeContentOffsetObserver(UIScrollView *scrollView);
  
 - (void)sj_removeCurrentPlayerView {
     self.sj_currentPlayingIndexPath = nil;
-    [[self viewWithTag:SJPlayerViewTag] removeFromSuperview];
+    [[self viewWithTag:SJBFCodeViewTag] removeFromSuperview];
 }
 
 - (void)sj_playNextAssetAfterEndScroll {
@@ -166,7 +166,7 @@ static void sj_playNextAssetAfterEndScroll(__kindof __kindof UIScrollView *self)
     if ( sortedVisibleIndexPaths.count < 1 )
         return;
     
-    SJPlayerAutoplayConfig *config = [self sj_autoplayConfig];
+    SJBFCodeAutoplayConfig *config = [self sj_autoplayConfig];
     NSIndexPath *_Nullable current = [self sj_currentPlayingIndexPath];
 
     UICollectionViewScrollDirection scrollDirection = config.scrollDirection;
@@ -237,7 +237,7 @@ static void sj_playNextAssetAfterEndScroll(__kindof __kindof UIScrollView *self)
     return floor(self.contentOffset.y + self.bounds.size.height) == floor(self.contentSize.height);
 }
 
-- (BOOL)sj_isAutoplayTargetViewAppearedForConfiguration:(SJPlayerAutoplayConfig *)config atIndexPath:(NSIndexPath *)indexPath {
+- (BOOL)sj_isAutoplayTargetViewAppearedForConfiguration:(SJBFCodeAutoplayConfig *)config atIndexPath:(NSIndexPath *)indexPath {
     SEL playerSuperviewSelector = config.playerSuperviewSelector;
     if ( playerSuperviewSelector != NULL )
         return [self isViewAppearedForSelector:playerSuperviewSelector insets:config.playableAreaInsets atIndexPath:indexPath];
@@ -251,7 +251,7 @@ static void sj_playNextAssetAfterEndScroll(__kindof __kindof UIScrollView *self)
     return [self isViewAppearedWithProtocol:@protocol(SJPlayModelPlayerSuperview) tag:0 insets:config.playableAreaInsets atIndexPath:indexPath];
 }
 
-- (nullable UIView *)sj_autoplayTargetViewForConfiguration:(SJPlayerAutoplayConfig *)config atIndexPath:(NSIndexPath *)indexPath {
+- (nullable UIView *)sj_autoplayTargetViewForConfiguration:(SJBFCodeAutoplayConfig *)config atIndexPath:(NSIndexPath *)indexPath {
     SEL playerSuperviewSelector = config.playerSuperviewSelector;
     if ( playerSuperviewSelector != NULL ) {
         return [self viewForSelector:playerSuperviewSelector atIndexPath:indexPath];
@@ -267,7 +267,7 @@ static void sj_playNextAssetAfterEndScroll(__kindof __kindof UIScrollView *self)
     }
 }
 
-- (CGFloat)sj_autoplayGuidelineForConfiguration:(SJPlayerAutoplayConfig *)config {
+- (CGFloat)sj_autoplayGuidelineForConfiguration:(SJBFCodeAutoplayConfig *)config {
     CGFloat guideline = 0;
     switch ( config.scrollDirection ) {
         case UICollectionViewScrollDirectionVertical: {
@@ -304,7 +304,7 @@ static void sj_playNextAssetAfterEndScroll(__kindof __kindof UIScrollView *self)
     return guideline;
 }
 
-- (UIEdgeInsets)sj_autoplayPlayableAreaInsetsForConfiguration:(SJPlayerAutoplayConfig *)config {
+- (UIEdgeInsets)sj_autoplayPlayableAreaInsetsForConfiguration:(SJBFCodeAutoplayConfig *)config {
     UIEdgeInsets insets = config.playableAreaInsets;
     switch ( config.scrollDirection ) {
         case UICollectionViewScrollDirectionVertical:
@@ -319,10 +319,10 @@ static void sj_playNextAssetAfterEndScroll(__kindof __kindof UIScrollView *self)
     return insets;
 }
 
-- (void)setSj_autoplayConfig:(nullable SJPlayerAutoplayConfig *)sj_autoplayConfig {
+- (void)setSj_autoplayConfig:(nullable SJBFCodeAutoplayConfig *)sj_autoplayConfig {
     objc_setAssociatedObject(self, @selector(sj_autoplayConfig), sj_autoplayConfig, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
-- (nullable SJPlayerAutoplayConfig *)sj_autoplayConfig {
+- (nullable SJBFCodeAutoplayConfig *)sj_autoplayConfig {
     return objc_getAssociatedObject(self, _cmd);
 }
 

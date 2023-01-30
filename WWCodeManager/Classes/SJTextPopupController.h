@@ -2,7 +2,7 @@
 //  SJTextPopupController.h
 //  SJTextPopupControllerProject
 //
-//  Created by 畅三江 on 2017/9/26.
+//  Created by admin on 2017/9/26.
 //  Copyright © 2017年 changsanjiang. All rights reserved.
 //
 

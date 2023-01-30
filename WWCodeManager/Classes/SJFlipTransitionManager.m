@@ -1,8 +1,8 @@
 //
 //  SJFlipTransitionManager.h
-//  SJVideoPlayerProject
+//  SJCommonCodeProject
 //
-//  Created by 畅三江 on 2018/2/2.
+//  Created by admin on 2018/2/2.
 //  Copyright © 2018年 changsanjiang. All rights reserved.
 //
 

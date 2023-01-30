@@ -2,8 +2,8 @@
 //  SJAttributeWorker.h
 //  SJAttributeWorker
 //
-//  Created by 畅三江 on 2017/11/12.
-//  Copyright © 2017年 畅三江. All rights reserved.
+//  Created by admin on 2017/11/12.
+//  Copyright © 2017年 admin. All rights reserved.
 //
 //  Project Address: https://github.com/changsanjiang/SJAttributesFactory
 //  Email:  changsanjiang@gmail.com

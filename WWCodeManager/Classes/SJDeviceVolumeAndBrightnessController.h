@@ -2,7 +2,7 @@
 //  SJDeviceVolumeAndBrightnessControllerDefines.h
 //  SJDeviceVolumeAndBrightnessController
 //
-//  Created by 畅三江 on 2017/12/10.
+//  Created by admin on 2017/12/10.
 //  Copyright © 2017年 changsanjiang. All rights reserved.
 //
 

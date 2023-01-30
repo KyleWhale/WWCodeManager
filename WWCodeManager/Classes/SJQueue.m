@@ -2,7 +2,7 @@
 //  SJQueue.m
 //  Pods
 //
-//  Created by 畅三江 on 2019/11/13.
+//  Created by admin on 2019/11/13.
 //
 
 #import "SJQueue.h"

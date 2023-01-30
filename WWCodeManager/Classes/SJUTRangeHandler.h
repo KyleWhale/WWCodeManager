@@ -2,7 +2,7 @@
 //  SJUTRangeHandler.h
 //  AttributesFactory
 //
-//  Created by 畅三江 on 2019/4/13.
+//  Created by admin on 2019/4/13.
 //  Copyright © 2019 SanJiang. All rights reserved.
 //
 

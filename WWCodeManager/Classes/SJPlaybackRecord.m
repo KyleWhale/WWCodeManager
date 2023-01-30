@@ -1,6 +1,6 @@
 //
 //  SJPlaybackRecord.m
-//  SJBaseVideoPlayer
+//  SJBaseCommonCode
 //
 //  Created by BlueDancer on 2020/5/25.
 //
@@ -14,7 +14,7 @@
 @end
 
 @implementation SJPlaybackRecord
-- (instancetype)initWithMediaId:(NSInteger)mediaId mediaType:(SJMediaType)mediaType userId:(NSInteger)userId {
+- (instancetype)initWithMediaId:(NSInteger)mediaId mediaType:(SJMTType)mediaType userId:(NSInteger)userId {
     self = [self init];
     if ( self ) {
         _mediaId = mediaId;
@@ -27,7 +27,7 @@
 - (instancetype)init {
     self = [super init];
     if ( self ) {
-        _mediaType = SJMediaTypeVideo;
+        _mediaType = SJMTTypeVideo;
     }
     return self;
 }

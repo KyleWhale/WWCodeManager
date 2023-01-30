@@ -2,12 +2,12 @@
 //  SJTextPopupController.m
 //  SJTextPopupControllerProject
 //
-//  Created by 畅三江 on 2017/9/26.
+//  Created by admin on 2017/9/26.
 //  Copyright © 2017年 changsanjiang. All rights reserved.
 //
 
 #import "SJTextPopupController.h"
-#import "SJBaseVideoPlayerConst.h"
+#import "SJBaseCommonCodeConst.h"
 #if __has_include(<Masonry/Masonry.h>)
 #import <Masonry/Masonry.h>
 #else
@@ -109,7 +109,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (UIView *)contentView {
     if ( _contentView == nil ) {
         _contentView = [UIView.alloc initWithFrame:CGRectZero];
-        _contentView.layer.zPosition = SJPlayerZIndexes.shared.textPopupViewZIndex;
+        _contentView.layer.zPosition = SJBFCodeZIndexes.shared.textPopupViewZIndex;
     }
     return _contentView;
 }

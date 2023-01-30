@@ -1,12 +1,12 @@
 //
 //  SJFitOnScreenManager.m
-//  SJBaseVideoPlayer
+//  SJBaseCommonCode
 //
-//  Created by 畅三江 on 2018/12/31.
+//  Created by admin on 2018/12/31.
 //
 
 #import "SJFitOnScreenManager.h"
-#import "UIViewController+SJBaseVideoPlayerExtended.h"
+#import "UIViewController+SJBaseCommonCodeExtended.h"
 
 NS_ASSUME_NONNULL_BEGIN
 static NSNotificationName const SJFitOnScreenManagerTransitioningValueDidChangeNotification = @"SJFitOnScreenManagerTransitioningValueDidChange";

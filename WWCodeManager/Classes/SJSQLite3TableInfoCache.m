@@ -2,7 +2,7 @@
 //  SJSQLite3TableInfoCache.m
 //  Pods-SJSQLite3_Example
 //
-//  Created by 畅三江 on 2019/7/30.
+//  Created by admin on 2019/7/30.
 //
 
 #import "SJSQLite3TableInfoCache.h"

@@ -1,8 +1,8 @@
 //
 //  SJRotationManager.m
-//  SJVideoPlayer_Example
+//  SJCommonCode_Example
 //
-//  Created by 畅三江 on 2022/8/13.
+//  Created by admin on 2022/8/13.
 //  Copyright © 2022 changsanjiang. All rights reserved.
 //
 
@@ -306,7 +306,7 @@
 #pragma mark - fix safe area
 
 #import <objc/message.h>
-#import "SJBaseVideoPlayerConst.h"
+#import "SJBaseCommonCodeConst.h"
 
 API_DEPRECATED("deprecated!", ios(13.0, 16.0)) @protocol _UIViewControllerSafeAreaFixingHooks <NSObject>
 - (void)_setContentOverlayInsets:(UIEdgeInsets)insets andLeftMargin:(CGFloat)leftMargin rightMargin:(CGFloat)rightMargin;
