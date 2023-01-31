@@ -161,13 +161,11 @@ _isIPhoneXSeries(void) {
         
         [_topAdapter.view mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.offset(self.autoAdjustTopSpacing?20:self.topMargin);
-            make.left.mas_greaterThanOrEqualTo(0).priorityLow();
             make.bottom.offset(0);
-            make.right.mas_lessThanOrEqualTo(0).priorityLow();
             make.centerX.offset(0);
-            
-            make.width.offset(safeWidth);
             make.height.offset(self.topHeight);
+            make.left.mas_equalTo(self.bottomContainerView).offset(20);
+            make.right.mas_equalTo(self.bottomContainerView).offset(-20);
         }];
         
         [_leftAdapter.view mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -175,25 +173,22 @@ _isIPhoneXSeries(void) {
             make.left.offset(safeLeftMargin + self.leftMargin);
             make.bottom.offset(0);
             make.right.offset(0);
-            
             make.width.offset(self.leftWidth);
         }];
         
         [_bottomAdapter.view mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.offset(0);
-            make.left.mas_greaterThanOrEqualTo(0).priorityLow();
             make.bottom.offset(-(self.bottomMargin + 20));
-            make.right.mas_lessThanOrEqualTo(0).priorityLow();
             make.centerX.offset(0);
-            
-            make.width.offset(safeWidth);
             make.height.offset(self.bottomHeight);
+            make.left.mas_equalTo(self.bottomContainerView).offset(20);
+            make.right.mas_equalTo(self.bottomContainerView).offset(-20);
+            
         }];
         
         [_rightAdapter.view mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.left.bottom.offset(0);
             make.right.offset(-(safeLeftMargin + self.rightMargin));
-            
             make.width.offset(self.rightWidth);
         }];
     }
