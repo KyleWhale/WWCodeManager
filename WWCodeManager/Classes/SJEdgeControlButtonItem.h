@@ -49,6 +49,8 @@ UIKIT_EXTERN NSNotificationName const SJEdgeControlButtonItemPerformedActionNoti
 @property (nonatomic) NSInteger numberOfLines; // default is 1.0
 @property (nonatomic, strong, nullable) UIImage *image;
 @property (nonatomic, getter=isHidden) BOOL hidden;
+// default is false if invalid == true action can not be perform
+@property (nonatomic, assign) BOOL invalid;
 @property (nonatomic) CGFloat alpha;
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new  NS_UNAVAILABLE;

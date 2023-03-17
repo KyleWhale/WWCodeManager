@@ -83,6 +83,10 @@ NSNotificationName const SJEdgeControlButtonItemPerformedActionNotification = @"
 }
 
 - (void)performActions {
+    
+    if (self.invalid) {
+        return;
+    }
     for ( SJEdgeControlButtonItemAction *action in _actions ) {
         if ( action.handler != nil ) {
             action.handler(action);
